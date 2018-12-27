@@ -13,18 +13,26 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class PlayScreen implements Screen{
 
+    public final static int V_WIDTH = 240;
+    public final static int V_HEIGHT = 400;
+    
+    
     private final FlappyBird game;
     private OrthographicCamera camera;
+    
     private Texture bg;
+    
+    private Bird bird;
     
     public PlayScreen(FlappyBird game){
         this.game = game;
-        
+        //set camera to area desired to see
         camera = new OrthographicCamera(480, 800);
-        camera.setToOrtho(false, 480, 800);
-        
+        camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
+        //set background texture
         bg = new Texture("bg.png");
-        
+        //create Bird
+        bird = new Bird(10, 300);
     }
     
     @Override
@@ -37,6 +45,8 @@ public class PlayScreen implements Screen{
     
     public void update() {
         handleInput();
+        //update bird
+        bird.update(Gdx.graphics.getDeltaTime());
     }
     
     @Override
@@ -44,8 +54,10 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClearColor(0, 0, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(bg, 0, 0, 480, 800);
+        game.batch.draw(bg, 0, 0);
+        game.batch.draw(bird.getTexture(), bird.getX(), bird.getY());
         game.batch.end();
         
         update();
@@ -70,6 +82,8 @@ public class PlayScreen implements Screen{
 
     @Override
     public void dispose() {
+        bg.dispose();
+        bird.dispose();
     }
 
 }
