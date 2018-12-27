@@ -40,7 +40,9 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(){
-        
+        if(Gdx.input.justTouched()){
+            bird.jump();
+        }
     }
     
     public void update() {
@@ -56,7 +58,7 @@ public class PlayScreen implements Screen{
         
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(bg, 0, 0);
+        game.batch.draw(bg, camera.position.x - camera.viewportWidth / 2, 0);
         game.batch.draw(bird.getTexture(), bird.getX(), bird.getY());
         game.batch.end();
         
