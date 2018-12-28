@@ -58,6 +58,10 @@ public class Bird {
         return false;
     }
     
+    public boolean collides(Rectangle ground){
+        return bounds.overlaps(ground);
+    }
+    
     public float getX(){
         return position.x;
     }
