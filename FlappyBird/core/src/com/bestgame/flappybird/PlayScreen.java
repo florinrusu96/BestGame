@@ -65,6 +65,10 @@ public class PlayScreen implements Screen{
                 tube.reposition(tubeIndex * TUBE_SPACING);
                 tubeIndex++;
             }
+            if(bird.collides(tube)){
+                game.getScreen().dispose();
+                game.setScreen(new PlayScreen(game));
+            }
         }
     }
     

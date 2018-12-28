@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 
@@ -21,12 +22,15 @@ public class Bird {
     private Texture texture;
     private Vector3 position;
     private Vector3 velocity;
+    private Rectangle bounds;
     
     public Bird(int x, int y){
         texture = new Texture("bird.png");
         //define position and velocity vectors
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0 ,0 ,0);
+        //define bounds
+        bounds = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
     }
     
     public void update(float delta){
@@ -38,12 +42,20 @@ public class Bird {
         if(position.y < 0){
             position.y = 0;
         }
+        bounds.setPosition(position.x, position.y);
         velocity.scl(1/delta);
         
     }
 
     public void jump(){
         velocity.y = 250;
+    }
+    
+    public boolean collides(Tube tube){
+        if(bounds.overlaps(tube.getBottomBounds()) || bounds.overlaps(tube.getTopBounds())){
+            return true;
+        }
+        return false;
     }
     
     public float getX(){

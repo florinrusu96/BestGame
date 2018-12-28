@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import java.util.Random;
 
@@ -22,6 +23,8 @@ public class Tube {
     
     private Texture topTube, bottomTube;
     private Vector3 topPosition, bottomPosition;
+    private Rectangle topBounds, bottomBounds;
+
     Random rand;
     
     public Tube(int x) {
@@ -33,6 +36,9 @@ public class Tube {
         //define positions
         topPosition = new Vector3(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
         bottomPosition = new Vector3(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);
+        //define bounds
+        topBounds = new Rectangle(x, topPosition.y, topTube.getWidth(), topTube.getHeight());
+        bottomBounds = new Rectangle(x, bottomPosition.y, bottomTube.getWidth(), bottomTube.getHeight());
         
     }
 
@@ -53,9 +59,21 @@ public class Tube {
         return bottomPosition;
     }
     
+    
+    public Rectangle getTopBounds() {
+        return topBounds;
+    }
+
+    public Rectangle getBottomBounds() {
+        return bottomBounds;
+    }
+    
     public void reposition(float x){
         topPosition.set(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
         bottomPosition.set(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);
+        //reposition bounds
+        topBounds.setPosition(topPosition.x, topPosition.y);
+        bottomBounds.setPosition(bottomPosition.x, bottomPosition.y);
     }
     
     public void dispose(){
