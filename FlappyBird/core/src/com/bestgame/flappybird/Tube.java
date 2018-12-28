@@ -15,7 +15,7 @@ import java.util.Random;
  * @author mehai
  */
 public class Tube {
-
+    public static final int TUBE_WIDTH = 52;
     private static final int FLUCTUATION = 130;
     private static final int SPACING = 100;
     private static final int MINVALUE = 100;
@@ -53,4 +53,13 @@ public class Tube {
         return bottomPosition;
     }
     
+    public void reposition(float x){
+        topPosition.set(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
+        bottomPosition.set(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);
+    }
+    
+    public void dispose(){
+        topTube.dispose();
+        bottomTube.dispose();
+    }
 }

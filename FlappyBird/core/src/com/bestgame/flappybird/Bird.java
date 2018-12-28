@@ -34,7 +34,7 @@ public class Bird {
             velocity.add(0, GRAVITY, 0);
         }
         velocity.scl(delta);
-        position.add(0, velocity.y, 0);
+        position.add(MOVEMENT*delta, velocity.y, 0);
         if(position.y < 0){
             position.y = 0;
         }
@@ -56,6 +56,10 @@ public class Bird {
     
     public Texture getTexture(){
         return texture;
+    }
+    
+    public float getMovement(float delta){
+        return MOVEMENT * delta;
     }
     
     public void dispose(){
