@@ -15,14 +15,13 @@ public class PlayScreen implements Screen{
 
     public final static int V_WIDTH = 240;
     public final static int V_HEIGHT = 400;
-    
-    
+
     private final FlappyBird game;
     private OrthographicCamera camera;
     
-    private Texture bg;
-    
+    private Texture bg; 
     private Bird bird;
+    private Tube tube;
     
     public PlayScreen(FlappyBird game){
         this.game = game;
@@ -33,6 +32,7 @@ public class PlayScreen implements Screen{
         bg = new Texture("bg.png");
         //create Bird
         bird = new Bird(10, 300);
+        tube = new Tube(100);
     }
     
     @Override
@@ -60,6 +60,8 @@ public class PlayScreen implements Screen{
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - camera.viewportWidth / 2, 0);
         game.batch.draw(bird.getTexture(), bird.getX(), bird.getY());
+        game.batch.draw(tube.getBottomTube(), tube.getBottomPosition().x, tube.getBottomPosition().y);
+        game.batch.draw(tube.getTopTube(), tube.getTopPosition().x, tube.getTopPosition().y);
         game.batch.end();
         
         update();
