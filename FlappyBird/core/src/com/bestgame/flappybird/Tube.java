@@ -1,10 +1,5 @@
 package com.bestgame.flappybird;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -68,6 +63,13 @@ public class Tube {
         return bottomBounds;
     }
     
+    /**
+     * Repositions current tube to the give x coordinate.
+     * It doesn't use the exact same pair of tubes, calling the
+     * Random object method again for a different fluctuation of
+     * tubes.
+     * @param x position where to move this tube
+     */
     public void reposition(float x){
         topPosition.set(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
         bottomPosition.set(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);

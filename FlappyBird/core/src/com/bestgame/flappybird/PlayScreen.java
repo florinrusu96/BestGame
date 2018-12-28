@@ -10,8 +10,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 /**
- *The actual screen for Flappy Bird where everything happens 
- * and elements interact.
+ *The actual screen for Flappy Bird where all elements exist 
+ *and interact.
  * @author mehai
  */
 public class PlayScreen implements Screen{
@@ -22,7 +22,7 @@ public class PlayScreen implements Screen{
     private final static int TUBE_COUNT = 3;
     
     private final FlappyBird game;
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
     
     protected Texture bg; 
     protected Texture ground;
@@ -33,6 +33,10 @@ public class PlayScreen implements Screen{
     private Array<Tube> tubes;
     private int tubeIndex = 1;
     
+    /**
+     * Defines the initial screen of the game and initializes all components
+     * @param game the actual game that delegates to this screen
+     */
     public PlayScreen(FlappyBird game){
         this.game = game;
         //set camera to area desired to see
@@ -60,13 +64,20 @@ public class PlayScreen implements Screen{
     @Override
     public void show() {
     }
-
+    
+    /**
+     * handles the possible received input.
+     */
     public void handleInput(){
         if(Gdx.input.justTouched()){
             bird.jump();
         }
     }
     
+    /**
+     * updates camera, component position and behavior.
+     * @param delta deltatime
+     */
     public void update(float delta) {
         handleInput();
         //update bird and camera
@@ -76,7 +87,7 @@ public class PlayScreen implements Screen{
         //reposition tubes if necesarry and check for collisions
         for(int i = 0; i < TUBE_COUNT; i++){
             Tube tube = tubes.get(i);
-            if(tube.getTopPosition().x + tube.TUBE_WIDTH < camera.position.x - (camera.viewportWidth / 2)){
+            if(tube.getTopPosition().x + Tube.TUBE_WIDTH < camera.position.x - (camera.viewportWidth / 2)){
                 tube.reposition(tubeIndex * TUBE_SPACING);
                 tubeIndex++;
             }
