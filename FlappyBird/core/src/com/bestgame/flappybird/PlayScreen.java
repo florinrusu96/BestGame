@@ -2,7 +2,6 @@ package com.bestgame.flappybird;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,8 +24,9 @@ public class PlayScreen implements Screen{
     private final FlappyBird game;
     private OrthographicCamera camera;
     
-    private Texture bg; 
-    private Texture ground;
+    protected Texture bg; 
+    protected Texture ground;
+    protected Texture topTube, bottomTube;
     private Vector3 groundPos1, groundPos2;
     private Rectangle groundBounds1, groundBounds2;
     private Bird bird;
@@ -42,9 +42,11 @@ public class PlayScreen implements Screen{
         bg = new Texture("bg.png");
         //create Sprites
         bird = new Bird(10, 300);
+        topTube = new Texture("toptube.png");
+        bottomTube = new Texture("bottomtube.png");
         tubes = new Array();
         for(int i = 0; i < TUBE_COUNT; i++){
-            tubes.add(new Tube(tubeIndex * TUBE_SPACING));
+            tubes.add(new Tube(tubeIndex * TUBE_SPACING, topTube, bottomTube));
             tubeIndex++;
         }
         //create ground
@@ -65,11 +67,11 @@ public class PlayScreen implements Screen{
         }
     }
     
-    public void update() {
+    public void update(float delta) {
         handleInput();
         //update bird and camera
-        bird.update(Gdx.graphics.getDeltaTime());
-        camera.position.x += bird.getMovement(Gdx.graphics.getDeltaTime());
+        bird.update(delta);
+        camera.position.x += bird.getMovement(delta);
         camera.update();
         //reposition tubes if necesarry and check for collisions
         for(int i = 0; i < TUBE_COUNT; i++){
@@ -117,7 +119,7 @@ public class PlayScreen implements Screen{
         game.batch.draw(ground, groundPos2.x, groundPos2.y);
         game.batch.end();
         
-        update();
+        update(delta);
     }
         
 
@@ -141,9 +143,8 @@ public class PlayScreen implements Screen{
     public void dispose() {
         bg.dispose();
         bird.dispose();
-        for(int i = 0; i < TUBE_COUNT; i++){
-            tubes.get(i).dispose();
-        }
+        topTube.dispose();
+        bottomTube.dispose();
         ground.dispose();
     }
 

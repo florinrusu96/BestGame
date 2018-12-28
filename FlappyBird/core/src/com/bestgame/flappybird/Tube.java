@@ -27,10 +27,10 @@ public class Tube {
 
     Random rand;
     
-    public Tube(int x) {
+    public Tube(int x, Texture topTube, Texture bottomTube) {
         //define textures
-        topTube = new Texture("toptube.png");
-        bottomTube = new Texture("bottomtube.png");
+        this.topTube = topTube;
+        this.bottomTube = bottomTube;
         //define a Random object
         rand = new Random();
         //define positions
@@ -74,10 +74,5 @@ public class Tube {
         //reposition bounds
         topBounds.setPosition(topPosition.x, topPosition.y);
         bottomBounds.setPosition(bottomPosition.x, bottomPosition.y);
-    }
-    
-    public void dispose(){
-        topTube.dispose();
-        bottomTube.dispose();
     }
 }
