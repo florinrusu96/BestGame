@@ -15,6 +15,7 @@ public class Tube {
     private static final int FLUCTUATION = 130;
     private static final int SPACING = 100;
     private static final int MINVALUE = 100;
+    private static final int DISTANCE = 200;
     
     private Texture topTube, bottomTube;
     private Vector3 topPosition, bottomPosition;
@@ -29,11 +30,11 @@ public class Tube {
         //define a Random object
         rand = new Random();
         //define positions
-        topPosition = new Vector3(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
-        bottomPosition = new Vector3(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);
+        topPosition = new Vector3(x + DISTANCE, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
+        bottomPosition = new Vector3(x + DISTANCE, topPosition.y - SPACING - bottomTube.getHeight(), 0);
         //define bounds
-        topBounds = new Rectangle(x, topPosition.y, topTube.getWidth(), topTube.getHeight());
-        bottomBounds = new Rectangle(x, bottomPosition.y, bottomTube.getWidth(), bottomTube.getHeight());
+        topBounds = new Rectangle(topPosition.x, topPosition.y, topTube.getWidth(), topTube.getHeight());
+        bottomBounds = new Rectangle(bottomPosition.x, bottomPosition.y, bottomTube.getWidth(), bottomTube.getHeight());
         
     }
 
@@ -71,8 +72,8 @@ public class Tube {
      * @param x position where to move this tube
      */
     public void reposition(float x){
-        topPosition.set(x, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
-        bottomPosition.set(x, topPosition.y - SPACING - bottomTube.getHeight(), 0);
+        topPosition.set(x + DISTANCE, rand.nextInt(FLUCTUATION) + SPACING + MINVALUE, 0);
+        bottomPosition.set(x + DISTANCE, topPosition.y - SPACING - bottomTube.getHeight(), 0);
         //reposition bounds
         topBounds.setPosition(topPosition.x, topPosition.y);
         bottomBounds.setPosition(bottomPosition.x, bottomPosition.y);

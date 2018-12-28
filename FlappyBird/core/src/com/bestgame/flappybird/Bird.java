@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
  * @author mehai
  */
 public class Bird {
-    private static final int GRAVITY = -15;
+    private static final int GRAVITY = -20;
     private static final int MOVEMENT = 100;
     
     private Texture texture;
@@ -36,6 +36,8 @@ public class Bird {
         position.add(MOVEMENT*delta, velocity.y, 0);
         if(position.y < 0){
             position.y = 0;
+        }else if(position.y > PlayScreen.V_HEIGHT){
+            position.y = PlayScreen.V_HEIGHT;
         }
         bounds.setPosition(position.x, position.y);
         velocity.scl(1/delta);
