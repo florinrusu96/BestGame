@@ -25,6 +25,7 @@ public class PlayScreen implements Screen{
     private Array<Rectangle> mazeBounds;
     private Rectangle finishLine;
     private Ghost ghost;
+    
     private OrthographicCamera cam;
     private Viewport viewPort;
     
@@ -36,8 +37,8 @@ public class PlayScreen implements Screen{
         this.game = game;
         //define camera and viewport
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, 480, 480);
-        viewPort = new FitViewport(480, 480, cam);
+        cam.setToOrtho(false, Maze.GAME_SIZE, Maze.GAME_SIZE);
+        viewPort = new FitViewport(Maze.GAME_SIZE, Maze.GAME_SIZE, cam);
         //initialize textures
         bg = new Texture("mazebg.png");
         maze = new Texture("maze.png");
@@ -58,7 +59,11 @@ public class PlayScreen implements Screen{
     public void show() {
     }
     
-    
+    /**
+     * Actions performed after each frame: ghost movement and
+     * collision detection.
+     * @param delta 
+     */
     private void update(float delta){
         ghost.update(delta);
         //check collision with finish line
@@ -66,6 +71,7 @@ public class PlayScreen implements Screen{
             System.out.println("GAME WON!");
             this.dispose();
             game.setScreen(new PlayScreen(game));
+            return;
         }
         //check collision with maze bounds
         boolean isInside = false;

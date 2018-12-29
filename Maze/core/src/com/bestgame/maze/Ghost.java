@@ -13,9 +13,7 @@ public class Ghost {
     
     private static final int START_X = 80;
     private static final int START_Y = 100;
-    private static final int SIZE = 10;
-    private static final int MOVEMENT = 100;
-    
+    private static final int SIZE = 10;    
     
     private Texture texture;
     private Vector3 position;
@@ -29,16 +27,21 @@ public class Ghost {
         bounds = new Rectangle(START_X, START_Y, SIZE, SIZE);
     }
 
+    /**
+     * Updates ghost position using distance formula. The ghost follows the
+     * point where the player touches and it goes there less and less faster.
+     * Further testing is needed for android version.
+     * @param delta 
+     */
     public void update(float delta){
         if(Gdx.input.isTouched()){
             //get coordinates
             int x = Gdx.input.getX();
             //y is given on a reversed basis by Gfx.input.getY()
-            //that's why we substract 480 (the height)
-            //The other number represents the top bar error we need to
-            //consider for input
-            int y = 480 + ((800 - 480) / 2) - Gdx.input.getY();
-            
+            //that's why we substract GAME_SIZE.
+            //The number in pharanteses represent the screen error we have
+            //because of the screen size (it represents the top black bar).
+            int y = Maze.GAME_SIZE + ((Maze.S_HEIGHT - Maze.S_WIDTH) / 2) - Gdx.input.getY();
             //formulas for distance
             float xDistance = x - position.x;
             float yDistance = y - position.y;
