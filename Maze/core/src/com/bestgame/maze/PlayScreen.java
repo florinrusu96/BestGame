@@ -45,7 +45,7 @@ public class PlayScreen implements Screen{
     
     
     private void update(float delta){
-        
+        ghost.update(delta);
     }
     
     @Override
