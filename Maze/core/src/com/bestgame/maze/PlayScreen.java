@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class PlayScreen implements Screen{
 
+    private static final int BOUNDS_COUNT = 5;
+    
     private Maze game;
     
     private Texture bg;
@@ -66,18 +68,28 @@ public class PlayScreen implements Screen{
             game.setScreen(new PlayScreen(game));
         }
         //check collision with maze bounds
-        boolean overlaps = false;
-        for(Rectangle bound : mazeBounds){
-            if(ghost.getBounds().overlaps(bound)){
-                overlaps = true;
+        boolean isInside = false;
+        Rectangle ghostBounds = ghost.getBounds();
+        for(int i = 0; i < BOUNDS_COUNT - 1; i++){
+            if(mazeBounds.get(i).contains(ghostBounds)){
+                isInside = true;
+                break;
+            }else if(ghostBounds.overlaps(mazeBounds.get(i)) && 
+                    ghostBounds.overlaps(mazeBounds.get(i+1))){
+                isInside = true;
+                break;
             }
         }
+        //check for the last one too
+        if(mazeBounds.get(BOUNDS_COUNT-1).contains(ghostBounds)){
+            isInside = true;
+        }
         //game lost
-        if(!overlaps){
+        if(!isInside){
             System.out.println("GAME LOST!");
             this.dispose();
             game.setScreen(new PlayScreen(game)); 
-        }       
+        }
     }
     
     @Override
