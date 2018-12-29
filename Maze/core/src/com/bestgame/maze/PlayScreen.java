@@ -18,6 +18,7 @@ public class PlayScreen implements Screen{
     
     private Texture bg;
     private Texture maze;
+    private Ghost ghost;
     private OrthographicCamera cam;
     private Viewport viewPort;
     
@@ -31,13 +32,20 @@ public class PlayScreen implements Screen{
         cam = new OrthographicCamera();
         cam.setToOrtho(false, 480, 480);
         viewPort = new FitViewport(480, 480, cam);
-        //define textures
+        //initialize textures
         bg = new Texture("mazebg.png");
         maze = new Texture("maze.png");
+        //initialize ghost
+        ghost = new Ghost();
     }
     
     @Override
     public void show() {
+    }
+    
+    
+    private void update(float delta){
+        
     }
     
     @Override
@@ -49,8 +57,10 @@ public class PlayScreen implements Screen{
         game.batch.begin();
         game.batch.draw(bg, 0, 0);
         game.batch.draw(maze, 0, 0);
+        game.batch.draw(ghost.getTexture(), ghost.getX(), ghost.getY());
         game.batch.end();
-
+        
+        update(delta);
     }
 
     @Override
@@ -74,6 +84,7 @@ public class PlayScreen implements Screen{
     public void dispose() {
         bg.dispose();
         maze.dispose();
+        ghost.dispose();           
     }
 
 }
