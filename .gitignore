@@ -49,3 +49,4 @@ FlappyBird/core/build/tmp/jar/MANIFEST\.MF
 FlappyBird/desktop/build/classes/java/main/com/bestgame/flappybird/desktop/DesktopLauncher\.class
 
 FlappyBird/local\.properties
+/Maze/.nb-gradle/
