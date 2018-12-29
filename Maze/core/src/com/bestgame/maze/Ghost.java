@@ -31,19 +31,25 @@ public class Ghost {
 
     public void update(float delta){
         if(Gdx.input.isTouched()){
+            //get coordinates
             int x = Gdx.input.getX();
+            //y is given on a reversed basis by Gfx.input.getY()
+            //that's why we substract 480 (the height)
+            //The other number represents the top bar error we need to
+            //consider for input
             int y = 480 + ((800 - 480) / 2) - Gdx.input.getY();
             
+            //formulas for distance
             float xDistance = x - position.x;
             float yDistance = y - position.y;
             float distance = (float)Math.sqrt(xDistance*xDistance + yDistance*yDistance);
+            //if the error is at most 10 pixels
             if(distance > 10){
-                float xsign = Math.signum(xDistance);
-                float ysign = Math.signum(yDistance);
+                //update position
                 position.x += xDistance * delta;
                 position.y += yDistance * delta;
             }
-            
+            //update bounds
             bounds.setPosition(position.x, position.y);
         }
     }
