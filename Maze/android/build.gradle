@@ -18,8 +18,9 @@ android {
     }
     defaultConfig {
         applicationId "com.bestgame.maze"
-        minSdkVersion 9
         targetSdkVersion 28
+        minSdkVersion 9
+        //targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
