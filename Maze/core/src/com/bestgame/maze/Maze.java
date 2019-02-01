@@ -8,10 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Maze extends Game {
-	
-        public static final int S_WIDTH = 480;
-        public static final int S_HEIGHT = 800;
-        public static final int GAME_SIZE = 480;
     
         SpriteBatch batch;
 	

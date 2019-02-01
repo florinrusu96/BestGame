@@ -27,7 +27,6 @@ public class PlayScreen implements Screen{
     private Ghost ghost;
     
     private OrthographicCamera cam;
-    private Viewport viewPort;
     
     /**
      * Setup of the game components.
@@ -37,8 +36,7 @@ public class PlayScreen implements Screen{
         this.game = game;
         //define camera and viewport
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, Maze.GAME_SIZE, Maze.GAME_SIZE);
-        viewPort = new FitViewport(Maze.GAME_SIZE, Maze.GAME_SIZE, cam);
+        cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //initialize textures
         bg = new Texture("mazebg.png");
         maze = new Texture("maze.png");
@@ -115,7 +113,6 @@ public class PlayScreen implements Screen{
 
     @Override
     public void resize(int width, int height) {
-        viewPort.update(width, height);
     }
 
     @Override

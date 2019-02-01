@@ -38,10 +38,7 @@ public class Ghost {
             //get coordinates
             int x = Gdx.input.getX();
             //y is given on a reversed basis by Gfx.input.getY()
-            //that's why we substract GAME_SIZE.
-            //The number in pharanteses represent the screen error we have
-            //because of the screen size (it represents the top black bar).
-            int y = Maze.GAME_SIZE + ((Maze.S_HEIGHT - Maze.S_WIDTH) / 2) - Gdx.input.getY();
+            int y = Gdx.graphics.getHeight() - 1 - Gdx.input.getY();
             //formulas for distance
             float xDistance = x - position.x;
             float yDistance = y - position.y;
