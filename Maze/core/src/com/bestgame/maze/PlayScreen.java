@@ -36,12 +36,12 @@ public class PlayScreen implements Screen{
         this.game = game;
         //define camera and viewport
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam.setToOrtho(false, 480, 480);
         //initialize textures
         bg = new Texture("mazebg.png");
         maze = new Texture("maze.png");
         //initialize ghost
-        ghost = new Ghost();
+        ghost = new Ghost(cam);
         //initialize maze bounds and finish line
         //numbers were obtained when i created the maze
         mazeBounds = new Array<Rectangle>();

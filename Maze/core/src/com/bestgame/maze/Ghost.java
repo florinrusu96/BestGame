@@ -1,6 +1,7 @@
 package com.bestgame.maze;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -14,12 +15,14 @@ public class Ghost {
     private static final int START_X = 80;
     private static final int START_Y = 100;
     private static final int SIZE = 10;    
+    private OrthographicCamera cam;
     
     private Texture texture;
     private Vector3 position;
     private Rectangle bounds;
     
-    public Ghost(){
+    public Ghost(OrthographicCamera cam){
+        this.cam = cam;
         //initialize texture and initial position
         texture = new Texture("mazeghost.png");
         position = new Vector3(START_X, START_Y, 0);
@@ -35,13 +38,11 @@ public class Ghost {
      */
     public void update(float delta){
         if(Gdx.input.isTouched()){
-            //get coordinates
-            int x = Gdx.input.getX();
-            //y is given on a reversed basis by Gfx.input.getY()
-            int y = Gdx.graphics.getHeight() - 1 - Gdx.input.getY();
+            //get coordinates in GameWorld coordinates
+            Vector3 touchPos = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             //formulas for distance
-            float xDistance = x - position.x;
-            float yDistance = y - position.y;
+            float xDistance = touchPos.x - position.x;
+            float yDistance = touchPos.y - position.y;
             float distance = (float)Math.sqrt(xDistance*xDistance + yDistance*yDistance);
             //if the error is at most 10 pixels
             if(distance > 10){
