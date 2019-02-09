@@ -15,12 +15,12 @@ public class Tile {
     private int y;
 
 
-    public Tile () {
+    public Tile () { //basic ctor
 
         tileTexture = new Texture("Tile1.png");
     }
 
-    public Tile (Tile obj1, Tile obj2) { //ctor din 2 alte Tile-uri. pastreaza pozitia primului obiect
+    public Tile (Tile obj1, Tile obj2) { //ctor from 2 tiles. keeps first object's position (i,j)
 
         this.x = obj1.x;
         this.y = obj1.y;
@@ -85,7 +85,7 @@ public class Tile {
         }
     }
 
-    public Tile (Tile obj) { //ctor prin copiere. aproape
+    public Tile (Tile obj) { //copy ctor... kinda
 
         this.x = obj.x;
         this.y = obj.y;
@@ -149,7 +149,7 @@ public class Tile {
         }
     }
 
-    public Tile (int val, int x, int y) { //ctor prin valori
+    public Tile (int val, int x, int y) { //ctor by values
 
         this.tileValue = val;
         this.x = x;

@@ -42,18 +42,23 @@ public class Board extends Tile {
 
         gameBoard[x1][y1] = new Tile(2,x1,y1);
         gameBoard[x2][y2] = new Tile(4,x2,y2);
-        //gameBoard[3][2] = new Tile(2,3,2);
     }
 
     public void gameActionRight() {
 
-        for (int j = 0; j < 4; ++j) {
+        //looks for tiles that can merge
+
+        for (int j = 0; j < 4; ++j) { 
 
             for (int i = 3; i > 0; --i) {
 
-                if (gameBoard[i][j] != null) {
+                if (gameBoard[i][j] != null) { //can't merge a null one
 
-                    loop:
+                    loop: //to break if merging happens. works, but sometimes jumps over a tile and merges with the one behind that. to look into
+                          //when looking into, also think of a way to determine whether there are any possible movements. For now, if there is no 
+                          //logical possible move in a direction, function will still work, though with no effect, and a new tile will still appear
+                          //~tied with determine if game over
+                          //also how to write documentation that's not 5 lines long for fuck's sake Jesus 
 
                     for (int k = i - 1; k >= 0; --k) {
 
@@ -61,8 +66,9 @@ public class Board extends Tile {
 
                             gameBoard[i][j] = new Tile(gameBoard[i][j], gameBoard[k][j]);
                             gameBoard[k][j] = null;
-                            score += gameBoard[i][j].getTileValue();
-
+                            score += gameBoard[i][j].getTileValue(); //score increments by new value. if two 4-valued 
+                                                                     //tiles merge into a 8-valued one, score will increment by 8
+ 
                             break loop;
                         }
 
@@ -74,6 +80,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //now shifts everything in the correct direction. Assumes correctly that there are no tiles left to merge
 
         for (int j = 0; j < 4; ++j) {
 
@@ -93,6 +101,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //adds new randomly placed Tile
 
         int x, y, z;
 
@@ -117,7 +127,9 @@ public class Board extends Tile {
         gameBoard[x][y] = new Tile(z,x,y);
     }
 
-    public void gameActionUp() { //aici ascultam manele here i was listening manele
+    public void gameActionUp() { //here i was listening manele
+
+    //looks for tiles that can merge
 
         for (int i = 0; i < 4; ++i) {
 
@@ -133,7 +145,8 @@ public class Board extends Tile {
 
                             gameBoard[i][j] = new Tile(gameBoard[i][j], gameBoard[i][k]);
                             gameBoard[i][k] = null;
-                            score += gameBoard[i][j].getTileValue();
+                            score += gameBoard[i][j].getTileValue(); //score increments by new value. if two 4-valued 
+                                                                     //tiles merge into a 8-valued one, score will increment by 8
 
                             break loop;
                         }
@@ -146,6 +159,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //now shifts everything in the correct direction. Assumes correctly that there are no tiles left to merge
 
         for (int i = 0; i < 4; ++i ) {
 
@@ -165,6 +180,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //adds new randomly placed Tile
 
         int x, y, z;
 
@@ -191,6 +208,8 @@ public class Board extends Tile {
 
     public void gameActionDown() {
 
+        //looks for tiles that can merge
+
         for (int i = 0; i < 4; ++i) {
 
             for (int j = 0; j < 3; ++j) {
@@ -205,7 +224,8 @@ public class Board extends Tile {
 
                             gameBoard[i][j] = new Tile(gameBoard[i][j], gameBoard[i][k]);
                             gameBoard[i][k] = null;
-                            score += gameBoard[i][j].getTileValue();
+                            score += gameBoard[i][j].getTileValue(); //score increments by new value. if two 4-valued 
+                                                                     //tiles merge into a 8-valued one, score will increment by 8
 
                             break loop;
                         }
@@ -218,6 +238,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //now shifts everything in the correct direction. Assumes correctly that there are no tiles left to merge
 
         for (int i = 0; i < 4; ++i ) {
 
@@ -245,6 +267,8 @@ public class Board extends Tile {
             }
         }
 
+        //adds new randomly placed Tile
+
         int x, y, z;
 
         do {
@@ -271,6 +295,8 @@ public class Board extends Tile {
 
     public void gameActionLeft() {
 
+        //looks for tiles that can merge
+
         for (int j = 0; j < 4; ++j) {
 
             for (int i = 0; i < 3; ++i) {
@@ -285,7 +311,8 @@ public class Board extends Tile {
 
                             gameBoard[i][j] = new Tile(gameBoard[i][j], gameBoard[k][j]);
                             gameBoard[k][j] = null;
-                            score += gameBoard[i][j].getTileValue();
+                            score += gameBoard[i][j].getTileValue(); //score increments by new value. if two 4-valued 
+                                                                     //tiles merge into a 8-valued one, score will increment by 8
 
                             break loop;
                         }
@@ -300,6 +327,8 @@ public class Board extends Tile {
             }
         }
 
+        //now shifts everything in the correct direction. Assumes correctly that there are no tiles left to merge
+
         for (int j = 0; j < 4; ++j) {
 
             for (int i = 0; i < 3; ++i) {
@@ -310,6 +339,7 @@ public class Board extends Tile {
 //                    gameBoard[i][j].setX(gameBoard[i + 1][j].getX() - 1);
 //                    gameBoard[i + 1][j] = null;
 //                }
+// reminscent above. may generate ideas in the future
 
                 if(gameBoard[i][j] == null) {
 
@@ -325,6 +355,8 @@ public class Board extends Tile {
                 }
             }
         }
+
+        //adds new randomly placed Tile
 
         int x, y, z;
 

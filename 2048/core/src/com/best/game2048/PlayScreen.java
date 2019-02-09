@@ -36,43 +36,43 @@ public class PlayScreen implements Screen {
 
     public void handleInput(){
 
-        //Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
+       int x = 0, y = 0;
 
-//        int x = 0, y = 0;
-//
-//        while(Gdx.input.isTouched()) {
-//
-//            x = Gdx.input.getDeltaX();
-//            y = Gdx.input.getDeltaY();
-//        }
-//
-//        if (x != 0 || y != 0) {
-//
-//            if ((x > y) && (x > 0)) {
-//
-//                gameBoard.gameActionRight();
-//            }
-//
-//            if ((x > y) && (x < 0)) {
-//
-//                gameBoard.gameActionUp();
-//            }
-//
-//            if ((x < y) && (y > 0)) {
-//
-//                gameBoard.gameActionDown();
-//            }
-//
-//            if ((x < y) && (y < 0)) {
-//
-//                gameBoard.gameActionLeft();
-//            }
-//        }
+       while(Gdx.input.isTouched()) {
 
-        if(Gdx.input.justTouched()) { //Test
+           x = Gdx.input.getDeltaX();
+           y = Gdx.input.getDeltaY();
+       }
 
-            gameBoard.gameActionRight();
-        }
+       if (x != 0 || y != 0) {
+
+           //empirically determined functions. because why not
+
+           if ((x > y) && (x > 0)) {
+
+               gameBoard.gameActionRight();
+           }
+
+           if ((x > y) && (x < 0)) {
+
+               gameBoard.gameActionUp();
+           }
+
+           if ((x < y) && (y > 0)) {
+
+               gameBoard.gameActionDown();
+           }
+
+           if ((x < y) && (y < 0)) {
+
+               gameBoard.gameActionLeft();
+           }
+       }
+
+        // if(Gdx.input.justTouched()) { //Test
+
+        //     gameBoard.gameActionRight();
+        // }
     }
 
     public void update() {
@@ -89,7 +89,7 @@ public class PlayScreen implements Screen {
         game.batch.begin();
         game.batch.draw(bgTexture, 0, 0, 720, 1280);
         game.batch.draw(gameBoard.boardTexture,45,260,630,630);
-        //font.draw(game.batch, "Hello", 0,0);
+        //font.draw(game.batch, "Hello", 0,0); <---- to be used for Score displaying purposes
 
         for (int i = 0; i < 4; ++i) {
 
