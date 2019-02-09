@@ -1,0 +1,7 @@
+72 dpi//32 bit depth !!!!
+
+background - 288x512 px
+board - 630x630 px
+tile - 140x140 px
+
+Png/Jpg (preferabil png)
