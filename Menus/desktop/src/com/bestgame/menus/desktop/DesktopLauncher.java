@@ -7,6 +7,8 @@ import com.bestgame.menus.BestGameMenus;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+                config.width = 480;
+                config.height = 800;
 		new LwjglApplication(new BestGameMenus(), config);
 	}
 }
