@@ -57,7 +57,7 @@ public class MainMenuScreen implements Screen {
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
                 
         Label pressLabel = new Label("Press anywhere to start ...", labelStyle);
-        pressLabel.setFontScale(2);
+        pressLabel.setFontScale(2 * Gdx.graphics.getWidth() / 480);
         table.add(pressLabel);
         stage.addActor(table);
         

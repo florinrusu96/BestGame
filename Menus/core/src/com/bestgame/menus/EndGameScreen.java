@@ -33,6 +33,7 @@ public class EndGameScreen implements Screen {
     private Table table;
     private Table btnTable;
     private Skin skin;
+    
     final private String[] messages = {
         "WOW! You are so good at it!\n",
         "Amazing skills!\n", 
@@ -40,9 +41,14 @@ public class EndGameScreen implements Screen {
         "Can you code as well as you play this game?\n", 
         "The world needs people like YOU!\n"};
     private String registerMessage = "Register for BESTEM!";
+    private int btnHeight;
+    private int btnWidth;
     
     public EndGameScreen(final BestGameMenus game) {
         this.game = game;
+        btnHeight = 50 * Gdx.graphics.getHeight() / 800;
+        btnWidth = 120 * Gdx.graphics.getWidth() / 480;
+
         stage = new Stage(new ScreenViewport(), game.batch);
         
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -62,10 +68,10 @@ public class EndGameScreen implements Screen {
         table.row();
         //Message Label
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
-        msg.setFontScale(1.5f);
+        msg.setFontScale(1.5f * Gdx.graphics.getWidth() / 480);
         msg.setAlignment(Align.center);
         table.add(msg);
-        table.getCell(msg).padBottom(20f);
+        table.getCell(msg).padBottom(Gdx.graphics.getHeight() / 8);
         table.row();
         
         //Middle Screen Image
@@ -78,7 +84,7 @@ public class EndGameScreen implements Screen {
         //Buttons
         
         btnTable = new Table(skin);
-        btnTable.setBounds(10, 40, Gdx.graphics.getWidth() - 20, 50);
+        btnTable.setBounds(10, Gdx.graphics.getHeight() / 12, Gdx.graphics.getWidth() - 20, 100);
         btnTable.align(Align.center);
         
         TextButton backBtn = new TextButton("Back", skin);
@@ -90,7 +96,7 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(backBtn);
         btnTable.getCell(backBtn).align(Align.left);
-        btnTable.getCell(backBtn).height(50).width(120);
+        btnTable.getCell(backBtn).height(btnHeight).width(btnWidth);
         btnTable.getCell(backBtn).spaceRight(Gdx.graphics.getWidth() / 3);
         
         TextButton playBtn = new TextButton("Play again", skin);
@@ -102,7 +108,7 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(playBtn);
         btnTable.getCell(playBtn).align(Align.right);
-        btnTable.getCell(playBtn).height(50).width(120);
+        btnTable.getCell(playBtn).height(btnHeight).width(btnWidth);
 
         
         
