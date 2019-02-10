@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 /**
  *
@@ -28,20 +29,10 @@ public class InterGameScreen implements Screen {
     private Table livesTable;
     private Table table;
     
-    private float scaleWidth;
-    private float scaleHeight;
-    
     public InterGameScreen(final BestGameMenus game) {
         //SETUP MAIN OBJECTS
         this.game = game;
-        
-        stage = new Stage(new ScreenViewport(), game.batch);
-        ((OrthographicCamera)stage.getCamera()).setToOrtho(false);
-        stage.getBatch().setProjectionMatrix(stage.getCamera().combined);
-        
-        scaleWidth =  stage.getWidth() / 480;
-        scaleHeight =  stage.getHeight() / 800;
-        
+        stage = new Stage(new StretchViewport(480, 800), game.batch);
         stage.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -55,7 +46,6 @@ public class InterGameScreen implements Screen {
         table.setBounds(0, 0, stage.getWidth(), stage.getHeight()/2);
         table.align(Align.center);
         
-        
         livesTable = new Table();
         livesTable.setBounds(0, stage.getHeight() / 2, stage.getWidth(), stage.getHeight() / 2);
         livesTable.align(Align.center);
@@ -64,7 +54,7 @@ public class InterGameScreen implements Screen {
         Texture texture = new Texture("robot.png");
         for(int i = 0; i < game.lifePoints; i++){
             Image robotLife = new Image(texture);
-            livesTable.add(robotLife).width(robotLife.getWidth()*(scaleWidth/4)).height(robotLife.getHeight()*(scaleHeight/4));
+            livesTable.add(robotLife).width(robotLife.getWidth()/4).height(robotLife.getHeight()/4);
             livesTable.getCell(robotLife).padTop(stage.getHeight() / 5);    
         }
         
@@ -74,14 +64,14 @@ public class InterGameScreen implements Screen {
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
-        scoreLabel.setFontScale(2 * scaleWidth);
+        scoreLabel.setFontScale(2);
         table.add(scoreLabel);
         table.getCell(scoreLabel).padBottom(stage.getHeight() / 10);
         table.row();
         
         //Label Play info     
         Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
-        pressLabel.setFontScale(2 * scaleWidth);
+        pressLabel.setFontScale(2);
         table.add(pressLabel);
         
         //table.debug();
