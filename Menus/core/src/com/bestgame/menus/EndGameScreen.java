@@ -41,13 +41,19 @@ public class EndGameScreen implements Screen {
         "Can you code as well as you play this game?\n", 
         "The world needs people like YOU!\n"};
     private String registerMessage = "Register for BESTEM!";
-    private int btnHeight;
-    private int btnWidth;
+    private float btnHeight;
+    private float btnWidth;
+    private float scaleWidth;
+    private float scaleHeight;
     
     public EndGameScreen(final BestGameMenus game) {
         this.game = game;
-        btnHeight = 50 * Gdx.graphics.getHeight() / 800;
-        btnWidth = 120 * Gdx.graphics.getWidth() / 480;
+
+        scaleWidth =  Gdx.graphics.getWidth() / 480;
+        scaleHeight =  Gdx.graphics.getHeight() / 800;
+
+        btnHeight = 50 * scaleHeight;
+        btnWidth = 120 * scaleWidth;
 
         stage = new Stage(new ScreenViewport(), game.batch);
         
@@ -62,13 +68,13 @@ public class EndGameScreen implements Screen {
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
-        scoreLabel.setFontScale(3);
+        scoreLabel.setFontScale(3 * Gdx.graphics.getWidth() / 480);
         table.add(scoreLabel);
         table.getCell(scoreLabel).padTop(Gdx.graphics.getHeight() / 5).padBottom(50);
         table.row();
         //Message Label
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
-        msg.setFontScale(1.5f * Gdx.graphics.getWidth() / 480);
+        msg.setFontScale(1.5f * scaleWidth);
         msg.setAlignment(Align.center);
         table.add(msg);
         table.getCell(msg).padBottom(Gdx.graphics.getHeight() / 8);
@@ -88,6 +94,8 @@ public class EndGameScreen implements Screen {
         btnTable.align(Align.center);
         
         TextButton backBtn = new TextButton("Back", skin);
+        backBtn.setSize(btnWidth, btnHeight);
+        backBtn.getLabel().setFontScale(2 * scaleWidth);
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -100,6 +108,8 @@ public class EndGameScreen implements Screen {
         btnTable.getCell(backBtn).spaceRight(Gdx.graphics.getWidth() / 3);
         
         TextButton playBtn = new TextButton("Play again", skin);
+        playBtn.setSize(btnWidth, btnHeight);
+        playBtn.getLabel().setFontScale(1.5f * scaleWidth);
         playBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
