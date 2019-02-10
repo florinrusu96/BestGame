@@ -99,6 +99,7 @@ public class EndGameScreen implements Screen {
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                //CHANGE SCREEN -> MAIN MENU SCREEN
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen(game));
             }
         });
@@ -113,7 +114,8 @@ public class EndGameScreen implements Screen {
         playBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen(game));
+                //CHANGE SCREEN -> NEW GAME SCREEN
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new InterGameScreen(game));
             }
         });
         btnTable.add(playBtn);

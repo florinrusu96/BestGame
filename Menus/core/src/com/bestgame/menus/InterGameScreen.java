@@ -3,35 +3,40 @@ package com.bestgame.menus;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- *  Main menu screen.
+ *
  * @author mehai
  */
-public class MainMenuScreen implements Screen {
+public class InterGameScreen implements Screen {
 
     final private Game game;
     private Stage stage;
+    private Table livesTable;
     private Table table;
     
-    public MainMenuScreen(final BestGameMenus game) {
+    private float scaleWidth;
+    private float scaleHeight;
+    
+    public InterGameScreen(final BestGameMenus game) {
         //SETUP MAIN OBJECTS
         this.game = game;
+        
+        scaleWidth =  Gdx.graphics.getWidth() / 480;
+        scaleHeight =  Gdx.graphics.getHeight() / 800;
+        
         stage = new Stage(new ScreenViewport(), game.batch);
         stage.addListener(new ClickListener() {
             @Override
@@ -41,28 +46,43 @@ public class MainMenuScreen implements Screen {
             }
         });
         table = new Table();
-        table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        table.align(Align.top);
+        table.setBounds(0, 0, stage.getWidth(), stage.getHeight()/2);
+        table.align(Align.center);
         
-        //LOGO BESTEM - title
-        Texture texture = new Texture("logov2.png");
-        Image logo = new Image(texture);
-        table.add(logo).width(Gdx.graphics.getWidth() / 2).height(Gdx.graphics.getWidth() * 6 / 18);
-        table.getCell(logo).padBottom(Gdx.graphics.getHeight() / 3).padTop(Gdx.graphics.getHeight() / 4);
         
-        table.row();
+        livesTable = new Table();
+        livesTable.setBounds(0, stage.getHeight() / 2, stage.getWidth(), stage.getHeight() / 2);
+        livesTable.align(Align.center);
         
-        //Label Play info
-        LabelStyle labelStyle = new LabelStyle();
+        //DRAW LIVES IMAGES
+        Texture texture = new Texture("robot.png");
+        for(int i = 0; i < game.lifePoints; i++){
+            Image robotLife = new Image(texture);
+            livesTable.add(robotLife).width(robotLife.getWidth() / 2).height(robotLife.getHeight() / 2);
+            livesTable.getCell(robotLife).padBottom(robotLife.getHeight() / 3).padTop(robotLife.getHeight() / 4);    
+        }
+        
+        //SCORE
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
-                
-        Label pressLabel = new Label("Press anywhere to start ...", labelStyle);
-        pressLabel.setFontScale(2 * Gdx.graphics.getWidth() / 480);
+        
+        Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
+        scoreLabel.setFontScale(2 * scaleWidth);
+        table.add(scoreLabel);
+        table.getCell(scoreLabel).padBottom(50);
+        table.row();
+        
+        //Label Play info     
+        Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
+        pressLabel.setFontScale(2 * scaleWidth);
         table.add(pressLabel);
+        
+        table.debug();
+        livesTable.debug();
+        
         stage.addActor(table);
-        
-        
+        stage.addActor(livesTable);
     }
 
     @Override

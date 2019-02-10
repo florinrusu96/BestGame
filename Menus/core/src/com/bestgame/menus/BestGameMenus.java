@@ -10,9 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class BestGameMenus extends Game {
 	public SpriteBatch batch;
         public int score;
+        public int lifePoints;
 	
 	@Override
 	public void create () {
+                lifePoints = 3;
 		batch = new SpriteBatch();
                 this.setScreen(new MainMenuScreen(this));
 	}
