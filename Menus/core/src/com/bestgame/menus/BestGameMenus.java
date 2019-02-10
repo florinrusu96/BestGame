@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BestGameMenus extends Game {
 	public SpriteBatch batch;
-        public BitmapFont font;
+        public int score;
 	
 	@Override
 	public void create () {
@@ -25,6 +25,5 @@ public class BestGameMenus extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		font.dispose();
 	}
 }
