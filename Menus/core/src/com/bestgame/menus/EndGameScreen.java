@@ -90,7 +90,7 @@ public class EndGameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //CHANGE SCREEN -> MAIN MENU SCREEN
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen(game));
+                game.setScreen(new MainMenuScreen(game));
             }
         });
         btnTable.add(backBtn);
@@ -105,7 +105,7 @@ public class EndGameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //CHANGE SCREEN -> NEW GAME SCREEN
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game));
             }
         });
         btnTable.add(playBtn);

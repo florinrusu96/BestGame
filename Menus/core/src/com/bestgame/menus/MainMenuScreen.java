@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import static com.bestgame.menus.BestGameMenus.MENU_HEIGHT;
@@ -33,12 +33,13 @@ public class MainMenuScreen implements Screen {
         //SETUP STAGE
         this.game = game;
         stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
-        stage.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //CHANGE SCREEN -> NEW GAME
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new EndGameScreen(game));
-            }
+        stage.addListener(new InputListener(){
+           @Override
+           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+               //CHANGE SCREEN -> NEW GAME SCREEN
+               game.setScreen(new EndGameScreen(game));
+               return true;
+           }
         });
         
         //SETUP TABLE

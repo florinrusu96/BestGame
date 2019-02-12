@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -34,12 +35,13 @@ public class InterGameScreen implements Screen {
         //SETUP STAGE
         this.game = game;
         stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
-        stage.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //CHANGE SCREEN -> NEW GAME
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new EndGameScreen(game));
-            }
+        stage.addListener(new InputListener(){
+           @Override
+           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+               //CHANGE SCREEN -> NEW GAME / ENDGAMESCREEN
+               game.setScreen(new EndGameScreen(game));
+               return true;
+           }
         });
         
         //SETUP TABLES
