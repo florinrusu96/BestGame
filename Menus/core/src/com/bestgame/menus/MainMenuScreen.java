@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -37,7 +39,12 @@ public class MainMenuScreen implements Screen {
            @Override
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                //CHANGE SCREEN -> NEW GAME SCREEN
-               game.setScreen(new EndGameScreen(game));
+               stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+                   @Override
+                   public void run() {
+                       game.setScreen(new EndGameScreen(game));               
+                   }
+               })));
                return true;
            }
         });
