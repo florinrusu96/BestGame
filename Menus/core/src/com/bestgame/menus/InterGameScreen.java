@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,8 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import static com.bestgame.menus.BestGameMenus.MENU_HEIGHT;
+import static com.bestgame.menus.BestGameMenus.MENU_WIDTH;
 
 /**
  *
@@ -28,11 +28,12 @@ public class InterGameScreen implements Screen {
     private Stage stage;
     private Table livesTable;
     private Table table;
+    private Texture texture;
     
     public InterGameScreen(final BestGameMenus game) {
-        //SETUP MAIN OBJECTS
+        //SETUP STAGE
         this.game = game;
-        stage = new Stage(new StretchViewport(480, 800), game.batch);
+        stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
         stage.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -43,19 +44,19 @@ public class InterGameScreen implements Screen {
         
         //SETUP TABLES
         table = new Table();
-        table.setBounds(0, 0, stage.getWidth(), stage.getHeight()/2);
+        table.setBounds(0, 0, MENU_WIDTH, MENU_HEIGHT/2);
         table.align(Align.center);
         
         livesTable = new Table();
-        livesTable.setBounds(0, stage.getHeight() / 2, stage.getWidth(), stage.getHeight() / 2);
+        livesTable.setBounds(0, MENU_HEIGHT / 2, MENU_WIDTH, MENU_HEIGHT / 2);
         livesTable.align(Align.center);
         
         //DRAW LIVES IMAGES
-        Texture texture = new Texture("robot.png");
+        texture = new Texture("robot.png");
         for(int i = 0; i < game.lifePoints; i++){
             Image robotLife = new Image(texture);
             livesTable.add(robotLife).width(robotLife.getWidth()/4).height(robotLife.getHeight()/4);
-            livesTable.getCell(robotLife).padTop(stage.getHeight() / 5);    
+            livesTable.getCell(robotLife).padTop(MENU_HEIGHT / 5);    
         }
         
         //SCORE
@@ -66,17 +67,17 @@ public class InterGameScreen implements Screen {
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
         scoreLabel.setFontScale(2);
         table.add(scoreLabel);
-        table.getCell(scoreLabel).padBottom(stage.getHeight() / 10);
+        table.getCell(scoreLabel).padBottom(MENU_HEIGHT / 10);
         table.row();
         
-        //Label Play info     
+        //CONTINUE LABEL 
         Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
         pressLabel.setFontScale(2);
         table.add(pressLabel);
         
+        //ADD EVERYTHING TO THE STAGE
         //table.debug();
         //livesTable.debug();
-        
         stage.addActor(table);
         stage.addActor(livesTable);
     }
@@ -113,6 +114,7 @@ public class InterGameScreen implements Screen {
 
     @Override
     public void dispose() {
+        texture.dispose();
         stage.dispose();
     }
 

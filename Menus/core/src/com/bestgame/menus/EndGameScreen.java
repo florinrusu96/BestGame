@@ -5,11 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,7 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import static com.bestgame.menus.BestGameMenus.MENU_HEIGHT;
+import static com.bestgame.menus.BestGameMenus.MENU_WIDTH;
 import java.util.Random;
 
 /**
@@ -33,6 +32,7 @@ public class EndGameScreen implements Screen {
     private Table table;
     private Table btnTable;
     private Skin skin;
+    private Texture texture;
     
     final private String[] messages = {
         "WOW! You are so good at it!\n",
@@ -41,61 +41,52 @@ public class EndGameScreen implements Screen {
         "Can you code as well as you play this game?\n", 
         "The world needs people like YOU!\n"};
     private String registerMessage = "Register for BESTEM!";
-    private float btnHeight;
-    private float btnWidth;
-    private float scaleWidth;
-    private float scaleHeight;
     
     public EndGameScreen(final BestGameMenus game) {
+        //SETUP STAGE AND SKIN
         this.game = game;
-
-        scaleWidth =  Gdx.graphics.getWidth() / 480;
-        scaleHeight =  Gdx.graphics.getHeight() / 800;
-
-        btnHeight = 50 * scaleHeight;
-        btnWidth = 120 * scaleWidth;
-
-        stage = new Stage(new ScreenViewport(), game.batch);
-        
+        stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         
+        //SETUP TABLE
         table = new Table();
-        table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        table.setBounds(0, 0, MENU_WIDTH, MENU_HEIGHT);
         table.align(Align.top);
         
-        //Score Label
+        //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
+        
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
-        scoreLabel.setFontScale(3 * Gdx.graphics.getWidth() / 480);
+        scoreLabel.setFontScale(3);
         table.add(scoreLabel);
-        table.getCell(scoreLabel).padTop(Gdx.graphics.getHeight() / 5).padBottom(50);
+        table.getCell(scoreLabel).padTop(MENU_HEIGHT / 5).padBottom(MENU_HEIGHT / 16);
         table.row();
-        //Message Label
+        
+        //MESSAGE LABEL
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
-        msg.setFontScale(1.5f * scaleWidth);
+        msg.setFontScale(1.5f);
         msg.setAlignment(Align.center);
         table.add(msg);
-        table.getCell(msg).padBottom(Gdx.graphics.getHeight() / 8);
+        table.getCell(msg).padBottom(MENU_HEIGHT / 8);
         table.row();
         
-        //Middle Screen Image
-        Texture texture = new Texture("logov2.png");
+        //MIDDLE SCREEN IMAGE
+        texture = new Texture("logov2.png");
         Image endGameImg = new Image(texture);
-        table.add(endGameImg).width(Gdx.graphics.getWidth() / 2).height(Gdx.graphics.getWidth() * 6 / 18);
-        table.getCell(endGameImg).padBottom(Gdx.graphics.getHeight() / 4);
+        table.add(endGameImg).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
+        table.getCell(endGameImg).padBottom(MENU_HEIGHT / 4);
         table.row();
         
-        //Buttons
-        
+        //BUTTONS TABLE AND BUTTONS
         btnTable = new Table(skin);
-        btnTable.setBounds(10, Gdx.graphics.getHeight() / 12, Gdx.graphics.getWidth() - 20, 100);
+        btnTable.setBounds(MENU_WIDTH / 10, MENU_HEIGHT / 12, MENU_WIDTH * 4/5, MENU_HEIGHT / 16);
         btnTable.align(Align.center);
         
         TextButton backBtn = new TextButton("Back", skin);
-        backBtn.setSize(btnWidth, btnHeight);
-        backBtn.getLabel().setFontScale(2 * scaleWidth);
+        backBtn.setSize(MENU_WIDTH/4, MENU_HEIGHT/16);
+        backBtn.getLabel().setFontScale(2);
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -105,12 +96,12 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(backBtn);
         btnTable.getCell(backBtn).align(Align.left);
-        btnTable.getCell(backBtn).height(btnHeight).width(btnWidth);
-        btnTable.getCell(backBtn).spaceRight(Gdx.graphics.getWidth() / 3);
+        btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/4);
+        btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 3);
         
         TextButton playBtn = new TextButton("Play again", skin);
-        playBtn.setSize(btnWidth, btnHeight);
-        playBtn.getLabel().setFontScale(1.5f * scaleWidth);
+        playBtn.setSize(MENU_WIDTH/4, MENU_HEIGHT/16);
+        playBtn.getLabel().setFontScale(1.5f);
         playBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -120,13 +111,11 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(playBtn);
         btnTable.getCell(playBtn).align(Align.right);
-        btnTable.getCell(playBtn).height(btnHeight).width(btnWidth);
-
+        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/4);
         
-        
+        //ADD TO STAGE
         //table.debug();
         //btnTable.debug();
-        
         stage.addActor(table);
         stage.addActor(btnTable);
     }
@@ -166,6 +155,7 @@ public class EndGameScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        texture.dispose();
     }
 
 }
