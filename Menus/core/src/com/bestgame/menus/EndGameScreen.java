@@ -85,8 +85,8 @@ public class EndGameScreen implements Screen {
         btnTable.align(Align.center);
         
         TextButton backBtn = new TextButton("Back", skin);
-        backBtn.setSize(MENU_WIDTH/4, MENU_HEIGHT/16);
-        backBtn.getLabel().setFontScale(2);
+        backBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        backBtn.getLabel().setStyle(labelStyle);
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -100,8 +100,8 @@ public class EndGameScreen implements Screen {
         btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 3);
         
         TextButton playBtn = new TextButton("Play again", skin);
-        playBtn.setSize(MENU_WIDTH/4, MENU_HEIGHT/16);
-        playBtn.getLabel().setFontScale(1.5f);
+        playBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        playBtn.getLabel().setStyle(labelStyle);
         playBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
