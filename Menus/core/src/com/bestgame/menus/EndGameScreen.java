@@ -57,7 +57,7 @@ public class EndGameScreen implements Screen {
         //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana32.fnt"));
-        labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
+        labelStyle.fontColor = Color.WHITE;
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
         table.add(scoreLabel);
@@ -129,7 +129,7 @@ public class EndGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0.6f, 0.8f, 1);
+        Gdx.gl.glClearColor(0.196f, 0.075f, 0.145f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         

@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
         //PLAY LABEL
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana25.fnt"));
-        labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
+        labelStyle.fontColor = Color.WHITE;
                 
         Label pressLabel = new Label("Press anywhere to start", labelStyle);
         table.add(pressLabel);
@@ -80,7 +80,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0.6f, 0.8f, 1);
+        Gdx.gl.glClearColor(0.196f, 0.075f, 0.145f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         stage.act();
