@@ -38,7 +38,7 @@ public class EndGameScreen implements Screen {
         "WOW! You are so good at it!\n",
         "Amazing skills!\n", 
         "What a player!\n", 
-        "Can you code as well as you play this game?\n", 
+        "Can you code as well as you play this?\n", 
         "The world needs people like YOU!\n"};
     private String registerMessage = "Register for BESTEM!";
     
@@ -55,18 +55,17 @@ public class EndGameScreen implements Screen {
         
         //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana32.fnt"));
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
-        scoreLabel.setFontScale(3);
         table.add(scoreLabel);
         table.getCell(scoreLabel).padTop(MENU_HEIGHT / 5).padBottom(MENU_HEIGHT / 16);
         table.row();
         
         //MESSAGE LABEL
+        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana22.fnt"));
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
-        msg.setFontScale(1.5f);
         msg.setAlignment(Align.center);
         table.add(msg);
         table.getCell(msg).padBottom(MENU_HEIGHT / 8);

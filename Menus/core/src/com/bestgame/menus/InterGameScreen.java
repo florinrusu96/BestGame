@@ -61,18 +61,17 @@ public class InterGameScreen implements Screen {
         
         //SCORE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana32.fnt"));
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
-        scoreLabel.setFontScale(2);
         table.add(scoreLabel);
         table.getCell(scoreLabel).padBottom(MENU_HEIGHT / 10);
         table.row();
         
-        //CONTINUE LABEL 
+        //CONTINUE LABEL
+        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana25.fnt"));
         Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
-        pressLabel.setFontScale(2);
         table.add(pressLabel);
         
         //ADD EVERYTHING TO THE STAGE

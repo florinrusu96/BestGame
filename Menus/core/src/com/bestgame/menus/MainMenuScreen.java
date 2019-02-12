@@ -55,11 +55,10 @@ public class MainMenuScreen implements Screen {
         
         //PLAY LABEL
         LabelStyle labelStyle = new LabelStyle();
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana25.fnt"));
         labelStyle.fontColor = new Color(0.196f, 0.075f, 0.145f, 1);
                 
-        Label pressLabel = new Label("Press anywhere to start ...", labelStyle);
-        pressLabel.setFontScale(2);
+        Label pressLabel = new Label("Press anywhere to start", labelStyle);
         table.add(pressLabel);
         
         //ADD TO STAGE
