@@ -9,7 +9,7 @@ public class PacManGame extends Game {
     @Override
     public void create () {
         batch = new SpriteBatch();
-        this.setScreen(new best.bestem.pacman.Board(this));
+        this.setScreen(new com.mygdx.game.Board(this));
     }
 
     @Override
