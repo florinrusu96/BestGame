@@ -11,10 +11,10 @@ import java.util.Random;
  * @author mehai
  */
 public class Tube {
-    public static final int TUBE_WIDTH = 52;
-    private static final int FLUCTUATION = 130;
-    private static final int SPACING = 100;
-    private static final int MINVALUE = 100;
+    public static final int TUBE_WIDTH = 66;
+    private static final int FLUCTUATION = 150;
+    private static final int SPACING = 200;
+    private static final int MINVALUE = 250;
     private static final int DISTANCE = 200;
     
     private Texture topTube, bottomTube;

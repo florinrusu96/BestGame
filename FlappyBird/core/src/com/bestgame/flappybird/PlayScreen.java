@@ -16,10 +16,10 @@ import com.badlogic.gdx.utils.Array;
  */
 public class PlayScreen implements Screen{
 
-    public final static int V_WIDTH = 240;
-    public final static int V_HEIGHT = 400;
-    private final static int TUBE_SPACING = 140;
-    private final static int TUBE_COUNT = 3;
+    public final static int V_WIDTH = 480;
+    public final static int V_HEIGHT = 800;
+    private final static int TUBE_SPACING = 160;
+    private final static int TUBE_COUNT = 4;
     
     private final FlappyBird game;
     private final OrthographicCamera camera;
@@ -43,20 +43,20 @@ public class PlayScreen implements Screen{
         camera = new OrthographicCamera(480, 800);
         camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
         //set background texture
-        bg = new Texture("bg.png");
+        bg = new Texture("flappy-bg.png");
         //create Sprites
         bird = new Bird(10, 300);
-        topTube = new Texture("toptube.png");
-        bottomTube = new Texture("bottomtube.png");
+        topTube = new Texture("toptubev2.png");
+        bottomTube = new Texture("bottomtubev2.png");
         tubes = new Array();
         for(int i = 0; i < TUBE_COUNT; i++){
             tubes.add(new Tube(tubeIndex * TUBE_SPACING, topTube, bottomTube));
             tubeIndex++;
         }
         //create ground
-        ground = new Texture("ground.png");
-        groundPos1 = new Vector3(camera.position.x - camera.viewportWidth / 2, -50, 0);
-        groundPos2 = new Vector3(groundPos1.x + ground.getWidth(), -50, 0);
+        ground = new Texture("groundv2.png");
+        groundPos1 = new Vector3(camera.position.x - camera.viewportWidth / 2, 0, 0);
+        groundPos2 = new Vector3(groundPos1.x + ground.getWidth(), 0, 0);
         groundBounds1 = new Rectangle(groundPos1.x, groundPos1.y, ground.getWidth(), ground.getHeight());
         groundBounds2 = new Rectangle(groundPos2.x, groundPos2.y, ground.getWidth(), ground.getHeight());
     }
@@ -119,7 +119,7 @@ public class PlayScreen implements Screen{
         
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(bg, camera.position.x - camera.viewportWidth / 2, 0);
+        game.batch.draw(bg, camera.position.x - camera.viewportWidth / 2, 92);
         game.batch.draw(bird.getTexture(), bird.getX(), bird.getY());
         for(int i = 0; i < TUBE_COUNT; i++){
             Tube tube = tubes.get(i);

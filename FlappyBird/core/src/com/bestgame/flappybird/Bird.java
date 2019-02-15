@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
  * @author mehai
  */
 public class Bird {
-    private static final int GRAVITY = -20;
+    private static final int GRAVITY = -25;
     private static final int MOVEMENT = 100;
     
     private Texture texture;
@@ -20,7 +20,7 @@ public class Bird {
     private Rectangle bounds;
     
     public Bird(int x, int y){
-        texture = new Texture("bird.png");
+        texture = new Texture("bot.png");
         //define position and velocity vectors
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0 ,0 ,0);
@@ -48,7 +48,7 @@ public class Bird {
      * Simulates jump using the velocity vector.
      */
     public void jump(){
-        velocity.y = 250;
+        velocity.y = 350;
     }
     
     /**
