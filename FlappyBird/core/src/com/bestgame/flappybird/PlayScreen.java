@@ -18,7 +18,7 @@ public class PlayScreen implements Screen{
 
     public final static int V_WIDTH = 480;
     public final static int V_HEIGHT = 800;
-    private final static int TUBE_SPACING = 160;
+    private final static int TUBE_SPACING = 180;
     private final static int TUBE_COUNT = 4;
     
     private final FlappyBird game;
