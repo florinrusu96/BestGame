@@ -92,7 +92,10 @@ public class EndGameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //CHANGE SCREEN -> MAIN MENU SCREEN
+                game.score = 0;
+                game.lifePoints = 3;
                 game.setScreen(new MainMenuScreen(game));
+                dispose();
             }
         });
         btnTable.add(backBtn);
@@ -107,7 +110,10 @@ public class EndGameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //CHANGE SCREEN -> NEW GAME SCREEN
+                game.lifePoints = 3;
+                game.score = 0;
                 game.setScreen(new InterGameScreen(game));
+                dispose();
             }
         });
         btnTable.add(playBtn);

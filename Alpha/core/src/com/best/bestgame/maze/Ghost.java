@@ -26,7 +26,7 @@ public class Ghost {
     public Ghost(OrthographicCamera cam){
         this.cam = cam;
         //initialize texture and initial position
-        texture = new Texture("mazeghost.png");
+        texture = new Texture("maze/mazeghost.png");
         position = new Vector3(START_X, START_Y, 0);
         //initialize rectangle representing bounds
         bounds = new Rectangle(START_X, START_Y, SIZE, SIZE);

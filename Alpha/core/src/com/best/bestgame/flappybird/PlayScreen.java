@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.menus.EndGameScreen;
+import com.best.bestgame.menus.InterGameScreen;
 
 /**
  *The actual screen for Flappy Bird where all elements exist 
@@ -93,9 +95,17 @@ public class PlayScreen implements Screen{
                 tube.reposition(tubeIndex * TUBE_SPACING);
                 tubeIndex++;
             }
+            /*SCREEN CHANGING HERE*/
             if(bird.collides(tube)){
+                game.lastScreen = this;
+                game.lifePoints--;
+                game.score += 50;
                 game.getScreen().dispose();
-                game.setScreen(new PlayScreen(game));
+                if(game.lifePoints != 0){
+                    game.setScreen(new InterGameScreen(game));
+                }else{
+                    game.setScreen(new EndGameScreen(game));
+                }
             }
         }
         //reposition ground if necesarry
@@ -108,9 +118,17 @@ public class PlayScreen implements Screen{
             groundBounds2.setPosition(groundPos2.x, groundPos1.y);
         }
         //check collision with ground
+        /*SCREEN CHANGING HERE*/
         if(bird.collides(groundBounds1) || bird.collides(groundBounds2)){
+            game.lastScreen = this;
+            game.lifePoints--;
+            game.score += 50;
             game.getScreen().dispose();
-            game.setScreen(new PlayScreen(game));
+            if(game.lifePoints != 0){
+                game.setScreen(new InterGameScreen(game));
+            }else{
+                game.setScreen(new EndGameScreen(game));
+            }
         }
     }
     

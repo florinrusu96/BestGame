@@ -43,7 +43,8 @@ public class MainMenuScreen implements Screen {
                stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
                    @Override
                    public void run() {
-                       game.setScreen(new EndGameScreen(game));               
+                       game.setScreen(new InterGameScreen(game));
+                       dispose();
                    }
                })));
                return true;

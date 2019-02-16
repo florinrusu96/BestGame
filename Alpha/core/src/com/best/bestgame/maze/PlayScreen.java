@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.menus.EndGameScreen;
+import com.best.bestgame.menus.InterGameScreen;
 
 /**
  *The actual Screen of the game where everything happens.
@@ -39,8 +41,8 @@ public class PlayScreen implements Screen{
         cam = new OrthographicCamera();
         cam.setToOrtho(false, 480, 480);
         //initialize textures
-        bg = new Texture("mazebg.png");
-        maze = new Texture("maze.png");
+        bg = new Texture("maze/mazebg.png");
+        maze = new Texture("maze/maze.png");
         //initialize ghost
         ghost = new Ghost(cam);
         //initialize maze bounds and finish line
@@ -66,10 +68,13 @@ public class PlayScreen implements Screen{
     private void update(float delta){
         ghost.update(delta);
         //check collision with finish line
+        /*GAME SCREEN CHANGES HERE*/
         if(ghost.getBounds().overlaps(finishLine)){
+            game.lastScreen = this;
             System.out.println("GAME WON!");
             this.dispose();
-            game.setScreen(new PlayScreen(game));
+            game.score += 100;
+            game.setScreen(new InterGameScreen(game));
             return;
         }
         //check collision with maze bounds
@@ -90,10 +95,18 @@ public class PlayScreen implements Screen{
             isInside = true;
         }
         //game lost
+        /*GAME SCREEN CHANGES HERE*/
         if(!isInside){
+            game.lastScreen = this;
             System.out.println("GAME LOST!");
             this.dispose();
-            game.setScreen(new PlayScreen(game));
+            game.score += 3;
+            game.lifePoints--;
+            if(game.lifePoints != 0){
+                game.setScreen(new InterGameScreen(game));
+            }else{
+                game.setScreen(new EndGameScreen(game));            
+            }
         }
     }
 

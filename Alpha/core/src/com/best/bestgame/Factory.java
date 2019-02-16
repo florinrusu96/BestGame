@@ -1,9 +1,7 @@
 package com.best.bestgame;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import java.util.Random;
-import com.best.bestgame.flappybird.PlayScreen;
 import com.best.bestgame.menus.InterGameScreen;
 
 /**
@@ -12,7 +10,8 @@ import com.best.bestgame.menus.InterGameScreen;
  */
 public class Factory {
     private static Factory factory = null;
-    private Random random;
+    private static final int N_GAMES = 2;
+    private final Random random;
     private final BestGame game;
     
     private Factory(final BestGame game){ 
@@ -20,7 +19,7 @@ public class Factory {
         this.game = game;
     }
     
-    public Factory getInstance(BestGame game){
+    public static Factory getInstance(BestGame game){
         if(factory == null){
             factory = new Factory(game);
         }
@@ -28,15 +27,25 @@ public class Factory {
     }
     
     public Screen factory(){
-        int index = random.nextInt(2);
-        switch(index){
-            case 0:
-                return new PlayScreen(game);
-            case 1:
-                return new com.best.bestgame.maze.PlayScreen(game);
-            default:
-                return new InterGameScreen(game);
+        int index = random.nextInt(N_GAMES);
+        if(index == 0){
+            if(game.lastScreen instanceof com.best.bestgame.flappybird.PlayScreen){
+                index = (index + 1) % 2;
+            }else{
+                return new com.best.bestgame.flappybird.PlayScreen(game);
+            }
         }
+        if(index == 1){
+            if(game.lastScreen instanceof com.best.bestgame.maze.PlayScreen){
+                return new com.best.bestgame.flappybird.PlayScreen(game);
+            }else{
+                return new com.best.bestgame.maze.PlayScreen(game);
+            }
+        }
+        if(index >= N_GAMES){
+            return new InterGameScreen(game);
+        }
+        return null;
     }
     
 }

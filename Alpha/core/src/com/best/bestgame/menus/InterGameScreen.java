@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.best.bestgame.BestGame;
 import static com.best.bestgame.BestGame.MENU_HEIGHT;
 import static com.best.bestgame.BestGame.MENU_WIDTH;
+import com.best.bestgame.Factory;
 
 /**
  *
@@ -40,7 +40,8 @@ public class InterGameScreen implements Screen {
            @Override
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                //CHANGE SCREEN -> NEW GAME / ENDGAMESCREEN
-               game.setScreen(new EndGameScreen(game));
+               game.setScreen(Factory.getInstance(game).factory());
+               dispose();
                return true;
            }
         });
