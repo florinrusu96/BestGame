@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.Timer;
 import com.best.bestgame.menus.EndGameScreen;
 import com.best.bestgame.menus.InterGameScreen;
 
@@ -37,12 +38,15 @@ public class PlayScreen implements Screen{
     private Array<Tube> tubes;
     private int tubeIndex = 1;
     
+    private Timer timer;
+    
     /**
      * Defines the initial screen of the game and initializes all components
      * @param game the actual game that delegates to this screen
      */
     public PlayScreen(final BestGame game){
         this.game = game;
+        timer = new Timer(20);
         //set camera to area desired to see
         camera = new OrthographicCamera(480, 800);
         camera.setToOrtho(false, V_WIDTH, V_HEIGHT);
@@ -99,7 +103,7 @@ public class PlayScreen implements Screen{
             if(bird.collides(tube)){
                 game.lastScreen = this;
                 game.lifePoints--;
-                game.score += 50;
+                game.score += tubeIndex;
                 game.getScreen().dispose();
                 if(game.lifePoints != 0){
                     game.setScreen(new InterGameScreen(game));
@@ -122,7 +126,7 @@ public class PlayScreen implements Screen{
         if(bird.collides(groundBounds1) || bird.collides(groundBounds2)){
             game.lastScreen = this;
             game.lifePoints--;
-            game.score += 50;
+            game.score += tubeIndex;
             game.getScreen().dispose();
             if(game.lifePoints != 0){
                 game.setScreen(new InterGameScreen(game));
@@ -137,6 +141,15 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClearColor(0, 0, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
+        // CHANGE SCREEN HERE -> TIME IS UP
+        if(!timer.update(delta)){
+            game.score += 100;
+            game.lastScreen = this;
+            dispose();
+            game.setScreen(new InterGameScreen(game));
+            return;
+        }
+        
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - camera.viewportWidth / 2, 92);
@@ -148,6 +161,8 @@ public class PlayScreen implements Screen{
         }
         game.batch.draw(ground, groundPos1.x, groundPos1.y);
         game.batch.draw(ground, groundPos2.x, groundPos2.y);
+        game.font.draw(game.batch, "Score: " + tubeIndex, camera.position.x - camera.viewportWidth / 2, camera.viewportHeight);
+        game.font.draw(game.batch, "" +timer.getSeconds(), camera.position.x + camera.viewportWidth / 2 - 20, camera.viewportHeight);
         game.batch.end();
         
         update(delta);

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.Timer;
 import com.best.bestgame.menus.EndGameScreen;
 import com.best.bestgame.menus.InterGameScreen;
 
@@ -31,12 +32,15 @@ public class PlayScreen implements Screen{
 
     private OrthographicCamera cam;
 
+    private Timer timer;
+    
     /**
      * Setup of the game components.
      * @param game
      */
     public PlayScreen(final BestGame game){
         this.game = game;
+        timer = new Timer(8);
         //define camera and viewport
         cam = new OrthographicCamera();
         cam.setToOrtho(false, 480, 480);
@@ -71,9 +75,8 @@ public class PlayScreen implements Screen{
         /*GAME SCREEN CHANGES HERE*/
         if(ghost.getBounds().overlaps(finishLine)){
             game.lastScreen = this;
-            System.out.println("GAME WON!");
-            this.dispose();
             game.score += 100;
+            this.dispose();
             game.setScreen(new InterGameScreen(game));
             return;
         }
@@ -98,10 +101,9 @@ public class PlayScreen implements Screen{
         /*GAME SCREEN CHANGES HERE*/
         if(!isInside){
             game.lastScreen = this;
-            System.out.println("GAME LOST!");
-            this.dispose();
-            game.score += 3;
+            game.score += 5;
             game.lifePoints--;
+            this.dispose();
             if(game.lifePoints != 0){
                 game.setScreen(new InterGameScreen(game));
             }else{
@@ -114,12 +116,27 @@ public class PlayScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(1,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        if(!timer.update(delta)){
+            game.lastScreen = this;
+            game.score += 5;
+            game.lifePoints--;
+            this.dispose();
+            if(game.lifePoints != 0){
+                game.setScreen(new InterGameScreen(game));
+            }else{
+                game.setScreen(new EndGameScreen(game));
+            }
+        }
+        
         game.batch.setProjectionMatrix(cam.combined);
 
         game.batch.begin();
         game.batch.draw(bg, 0, 0);
         game.batch.draw(maze, 0, 0);
         game.batch.draw(ghost.getTexture(), ghost.getX(), ghost.getY());
+        game.font.draw(game.batch, "Score: 5", 0, cam.viewportHeight);
+        game.font.draw(game.batch, "" + timer.getSeconds(), cam.position.x + cam.viewportWidth/2 - 20, cam.viewportHeight);
         game.batch.end();
 
         update(delta);

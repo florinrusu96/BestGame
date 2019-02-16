@@ -14,7 +14,7 @@ import com.best.bestgame.BestGame;
 import com.best.bestgame.menus.EndGameScreen;
 import com.best.bestgame.menus.InterGameScreen;
 
-import java.util.Timer;
+import com.best.bestgame.Timer;
 
 public class Board implements Screen {
 
@@ -86,6 +86,8 @@ public class Board implements Screen {
 
     public Board(final BestGame game) {
         this.game = game;
+        this.timer = new Timer(30);
+        
         game.batch.getProjectionMatrix().setToOrtho2D(0, 0,
                 Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -173,6 +175,8 @@ public class Board implements Screen {
 
         font.draw(game.batch, str, (int) (Gdx.graphics.getWidth() - ASPECT_RATIO * 96),
                 (int) (Gdx.graphics.getHeight() - ASPECT_RATIO * 16));
+        font.draw(game.batch, "" + timer.getSeconds(), (int) (Gdx.graphics.getWidth() / 2 - ASPECT_RATIO * 48),
+                (int) (Gdx.graphics.getHeight() - ASPECT_RATIO * 16));
 
         int i;
         for (i = 0; i < pacsLeft; i++) {
@@ -217,9 +221,9 @@ public class Board implements Screen {
     private void death() {
 
         pacsLeft--;
-
+        score -= 10;
         if (pacsLeft == 0) {
-            /*CHANGE SCREEN HERE
+            /*CHANGE SCREEN HERE  -> GAME LOST
             inGame = false;
             initLevel();*/
             game.lastScreen = this;
@@ -605,6 +609,14 @@ public class Board implements Screen {
         Gdx.gl.glClearColor(1, 1, 1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //CHANGE SCREEN HERE -> GAME WON
+        if(!timer.update(delta)){
+            game.score += score;
+            game.lastScreen = this;
+            this.dispose();
+            game.setScreen(new InterGameScreen(game));
+        }
+        
         checkInput();
 
         drawMaze();

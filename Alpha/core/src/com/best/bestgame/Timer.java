@@ -27,7 +27,9 @@ public class Timer {
      * @return boolean weather there's time left or not
      */
     public boolean update(float delta){
-        target -= delta;
+        if(target > 0){
+            target -= delta;
+        }
         return target > 0;
     }
     

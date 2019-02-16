@@ -19,6 +19,7 @@ import com.best.bestgame.BestGame;
 import static com.best.bestgame.BestGame.MENU_HEIGHT;
 import static com.best.bestgame.BestGame.MENU_WIDTH;
 import com.best.bestgame.Factory;
+import com.best.bestgame.Timer;
 
 /**
  *
@@ -32,16 +33,22 @@ public class InterGameScreen implements Screen {
     private Table table;
     private Texture texture;
     
+    private boolean canContinue;
+    private Timer timer;
+    
     public InterGameScreen(final BestGame game) {
         //SETUP STAGE
         this.game = game;
+        timer = new Timer(1);
         stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
         stage.addListener(new InputListener(){
            @Override
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                //CHANGE SCREEN -> NEW GAME / ENDGAMESCREEN
-               game.setScreen(Factory.getInstance(game).factory());
-               dispose();
+               if(canContinue){
+                    game.setScreen(Factory.getInstance(game).factory());
+                    dispose();                  
+               }
                return true;
            }
         });
@@ -94,6 +101,10 @@ public class InterGameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.196f, 0.075f, 0.145f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        if(!timer.update(delta)){
+            canContinue = true;
+        }
         
         stage.act();
         stage.draw();
