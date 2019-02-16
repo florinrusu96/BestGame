@@ -161,8 +161,8 @@ public class PlayScreen implements Screen{
         }
         game.batch.draw(ground, groundPos1.x, groundPos1.y);
         game.batch.draw(ground, groundPos2.x, groundPos2.y);
-        game.font.draw(game.batch, "Score: " + tubeIndex, camera.position.x - camera.viewportWidth / 2, camera.viewportHeight);
-        game.font.draw(game.batch, "" +timer.getSeconds(), camera.position.x + camera.viewportWidth / 2 - 20, camera.viewportHeight);
+        game.font.draw(game.batch, "Score: " + tubeIndex, camera.position.x - camera.viewportWidth / 2 + 20, camera.viewportHeight - 20);
+        game.font.draw(game.batch, "" +timer.getSeconds(), camera.position.x + camera.viewportWidth / 2 - 50, camera.viewportHeight - 20);
         game.batch.end();
         
         update(delta);
