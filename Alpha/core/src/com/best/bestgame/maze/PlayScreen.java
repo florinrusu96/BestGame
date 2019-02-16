@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.best.bestgame.BestGame;
 
 /**
  *The actual Screen of the game where everything happens.
@@ -20,7 +19,7 @@ public class PlayScreen implements Screen{
 
     private static final int BOUNDS_COUNT = 5;
 
-    private Maze game;
+    private BestGame game;
 
     private Texture bg;
     private Texture maze;
@@ -34,7 +33,7 @@ public class PlayScreen implements Screen{
      * Setup of the game components.
      * @param game
      */
-    public PlayScreen(Maze game){
+    public PlayScreen(final BestGame game){
         this.game = game;
         //define camera and viewport
         cam = new OrthographicCamera();

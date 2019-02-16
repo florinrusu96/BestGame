@@ -55,7 +55,7 @@ public class InterGameScreen implements Screen {
         livesTable.align(Align.center);
         
         //DRAW LIVES IMAGES
-        texture = new Texture("robot.png");
+        texture = new Texture("menus/robot.png");
         for(int i = 0; i < game.lifePoints; i++){
             Image robotLife = new Image(texture);
             livesTable.add(robotLife).width(robotLife.getWidth()/4).height(robotLife.getHeight()/4);
@@ -64,7 +64,7 @@ public class InterGameScreen implements Screen {
         
         //SCORE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana32.fnt"));
+        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
         labelStyle.fontColor = Color.WHITE;
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
@@ -73,7 +73,7 @@ public class InterGameScreen implements Screen {
         table.row();
         
         //CONTINUE LABEL
-        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana25.fnt"));
+        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
         Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
         table.add(pressLabel);
         

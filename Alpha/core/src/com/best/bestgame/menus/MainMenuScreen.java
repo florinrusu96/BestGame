@@ -56,7 +56,7 @@ public class MainMenuScreen implements Screen {
         table.align(Align.top);
         
         //LOGO BESTEM - title
-        texture = new Texture("logov2.png");
+        texture = new Texture("menus/logov2.png");
         Image logo = new Image(texture);
         table.add(logo).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
         table.getCell(logo).padBottom(MENU_HEIGHT / 3).padTop(MENU_HEIGHT / 4);
@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
         
         //PLAY LABEL
         LabelStyle labelStyle = new LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana25.fnt"));
+        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
         labelStyle.fontColor = Color.WHITE;
                 
         Label pressLabel = new Label("Press anywhere to start", labelStyle);

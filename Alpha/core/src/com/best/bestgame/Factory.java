@@ -3,6 +3,8 @@ package com.best.bestgame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import java.util.Random;
+import com.best.bestgame.flappybird.PlayScreen;
+import com.best.bestgame.menus.InterGameScreen;
 
 /**
  *  Singleton-Factory class designed to return a new Random Game Screen
@@ -11,7 +13,7 @@ import java.util.Random;
 public class Factory {
     private static Factory factory = null;
     private Random random;
-    private BestGame game;
+    private final BestGame game;
     
     private Factory(final BestGame game){ 
         random = new Random();
@@ -29,11 +31,9 @@ public class Factory {
         int index = random.nextInt(2);
         switch(index){
             case 0:
-                return new flappybird.PlayScreen(game);
-                break;
+                return new PlayScreen(game);
             case 1:
-                return new maze.PlayScreen(game);
-                break;
+                return new com.best.bestgame.maze.PlayScreen(game);
             default:
                 return new InterGameScreen(game);
         }

@@ -8,15 +8,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.best.bestgame.pacman.PacManGame;
+import com.best.bestgame.BestGame;
 
 import java.util.Timer;
 
 public class Board implements Screen {
 
-    private final PacManGame game;
+    private final BestGame game;
     private final OrthographicCamera camera;
 
     private final Color dotColor = new Color(192 / 255f, 192 / 255f, 0, 1);
@@ -82,7 +82,7 @@ public class Board implements Screen {
     private final int startX, startY;
     BitmapFont font;
 
-    public Board(PacManGame game) {
+    public Board(final BestGame game) {
         this.game = game;
         game.batch.getProjectionMatrix().setToOrtho2D(0, 0,
                 Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
@@ -99,7 +99,7 @@ public class Board implements Screen {
     }
 
     private void setupFont() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("myfont.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pacman/myfont.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = (int) (12 * ASPECT_RATIO);
         parameter.color = new Color(96 /255f, 128 / 255f, 1, 1);
@@ -565,20 +565,20 @@ public class Board implements Screen {
     }
 
     private void loadImages() {
-        ghost = new Texture("images/Ghost.png");
-        pacman1 = new Texture("images/PacMan.png");
-        pacman2up = new Texture("images/PacMan.png");
-        pacman3up = new Texture("images/PacMan.png");
-        pacman4up = new Texture("images/PacMan.png");
-        pacman2down = new Texture("images/PacMan.png");
-        pacman3down = new Texture("images/PacMan.png");
-        pacman4down = new Texture("images/PacMan.png");
-        pacman2left = new Texture("images/PacMan.png");
-        pacman3left = new Texture("images/PacMan.png");
-        pacman4left = new Texture("images/PacMan.png");
-        pacman2right = new Texture("images/PacMan.png");
-        pacman3right = new Texture("images/PacMan.png");
-        pacman4right = new Texture("images/PacMan.png");
+        ghost = new Texture("pacman/images/Ghost.png");
+        pacman1 = new Texture("pacman/images/PacMan.png");
+        pacman2up = new Texture("pacman/images/PacMan.png");
+        pacman3up = new Texture("pacman/images/PacMan.png");
+        pacman4up = new Texture("pacman/images/PacMan.png");
+        pacman2down = new Texture("pacman/images/PacMan.png");
+        pacman3down = new Texture("pacman/images/PacMan.png");
+        pacman4down = new Texture("pacman/images/PacMan.png");
+        pacman2left = new Texture("pacman/images/PacMan.png");
+        pacman3left = new Texture("pacman/images/PacMan.png");
+        pacman4left = new Texture("pacman/images/PacMan.png");
+        pacman2right = new Texture("pacman/images/PacMan.png");
+        pacman3right = new Texture("pacman/images/PacMan.png");
+        pacman4right = new Texture("pacman/images/PacMan.png");
 
     }
 

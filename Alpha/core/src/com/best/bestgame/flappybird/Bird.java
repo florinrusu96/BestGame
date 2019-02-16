@@ -11,23 +11,23 @@ import com.badlogic.gdx.math.Vector3;
  * @author mehai
  */
 public class Bird {
-    private static final int GRAVITY = -20;
-    private static final int MOVEMENT = 100;
-
+    private static final int GRAVITY = -25;
+    private static final int MOVEMENT = 120;
+    
     private Texture texture;
     private Vector3 position;
     private Vector3 velocity;
     private Rectangle bounds;
-
+    
     public Bird(int x, int y){
-        texture = new Texture("bird.png");
+        texture = new Texture("flappybird/bot.png");
         //define position and velocity vectors
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0 ,0 ,0);
         //define bounds
         bounds = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
     }
-
+    
     public void update(float delta){
         if(position.y > 0){
             velocity.add(0, GRAVITY, 0);
@@ -41,16 +41,16 @@ public class Bird {
         }
         bounds.setPosition(position.x, position.y);
         velocity.scl(1/delta);
-
+        
     }
 
     /**
      * Simulates jump using the velocity vector.
      */
     public void jump(){
-        velocity.y = 250;
+        velocity.y = 350;
     }
-
+    
     /**
      * Checks if bird collides with given tube
      * @param tube tube to be checked for collision with bird
@@ -62,8 +62,8 @@ public class Bird {
         }
         return false;
     }
-
-
+    
+    
     /**
      * Checks if bird collides with given ground Object
      * @param ground ground object to be checked for collision with bird
@@ -72,30 +72,30 @@ public class Bird {
     public boolean collides(Rectangle ground){
         return bounds.overlaps(ground);
     }
-
+    
     public float getX(){
         return position.x;
     }
-
+    
     public float getY(){
         return position.y;
     }
-
+    
     public Texture getTexture(){
         return texture;
     }
-
+    
     /**
      * Returns movement executed on X axis by bird
      * @param delta deltatime
-     * @return
+     * @return 
      */
     public float getMovement(float delta){
         return MOVEMENT * delta;
     }
-
+    
     public void dispose(){
         texture.dispose();
     }
-
+    
 }

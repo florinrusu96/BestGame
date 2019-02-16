@@ -48,7 +48,7 @@ public class EndGameScreen implements Screen {
         //SETUP STAGE AND SKIN
         this.game = game;
         stage = new Stage(new StretchViewport(MENU_WIDTH, MENU_HEIGHT), game.batch);
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("menus/skin/uiskin.json"));
         
         //SETUP TABLE
         table = new Table();
@@ -57,7 +57,7 @@ public class EndGameScreen implements Screen {
         
         //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana32.fnt"));
+        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
         labelStyle.fontColor = Color.WHITE;
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
@@ -66,7 +66,7 @@ public class EndGameScreen implements Screen {
         table.row();
         
         //MESSAGE LABEL
-        labelStyle.font = new BitmapFont(Gdx.files.internal("fonts/verdana22.fnt"));
+        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana22.fnt"));
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
         msg.setAlignment(Align.center);
         table.add(msg);
@@ -74,7 +74,7 @@ public class EndGameScreen implements Screen {
         table.row();
         
         //MIDDLE SCREEN IMAGE
-        texture = new Texture("logov2.png");
+        texture = new Texture("menus/logov2.png");
         Image endGameImg = new Image(texture);
         table.add(endGameImg).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
         table.getCell(endGameImg).padBottom(MENU_HEIGHT / 4);

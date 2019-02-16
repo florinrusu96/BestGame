@@ -11,18 +11,18 @@ import java.util.Random;
  * @author mehai
  */
 public class Tube {
-    public static final int TUBE_WIDTH = 52;
-    private static final int FLUCTUATION = 130;
-    private static final int SPACING = 100;
-    private static final int MINVALUE = 100;
+    public static final int TUBE_WIDTH = 66;
+    private static final int FLUCTUATION = 150;
+    private static final int SPACING = 200;
+    private static final int MINVALUE = 250;
     private static final int DISTANCE = 200;
-
+    
     private Texture topTube, bottomTube;
     private Vector3 topPosition, bottomPosition;
     private Rectangle topBounds, bottomBounds;
 
     Random rand;
-
+    
     public Tube(int x, Texture topTube, Texture bottomTube) {
         //define textures
         this.topTube = topTube;
@@ -35,7 +35,7 @@ public class Tube {
         //define bounds
         topBounds = new Rectangle(topPosition.x, topPosition.y, topTube.getWidth(), topTube.getHeight());
         bottomBounds = new Rectangle(bottomPosition.x, bottomPosition.y, bottomTube.getWidth(), bottomTube.getHeight());
-
+        
     }
 
     public Texture getTopTube() {
@@ -54,8 +54,8 @@ public class Tube {
     public Vector3 getBottomPosition() {
         return bottomPosition;
     }
-
-
+    
+    
     public Rectangle getTopBounds() {
         return topBounds;
     }
@@ -63,7 +63,7 @@ public class Tube {
     public Rectangle getBottomBounds() {
         return bottomBounds;
     }
-
+    
     /**
      * Repositions current tube to the give x coordinate.
      * It doesn't use the exact same pair of tubes, calling the
@@ -79,4 +79,3 @@ public class Tube {
         bottomBounds.setPosition(bottomPosition.x, bottomPosition.y);
     }
 }
-
