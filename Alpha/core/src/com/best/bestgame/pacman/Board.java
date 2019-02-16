@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.menus.InterGameScreen;
 
 import java.util.Timer;
 
@@ -217,8 +218,14 @@ public class Board implements Screen {
         pacsLeft--;
 
         if (pacsLeft == 0) {
+            /*CHANGE SCREEN HERE
             inGame = false;
-            initLevel();
+            initLevel();*/
+            game.lastScreen = this;
+            game.lifePoints--;
+            game.score += this.score;
+            this.dispose();
+            game.setScreen(new InterGameScreen(game));
         }
 
         continueLevel();
@@ -686,7 +693,8 @@ public class Board implements Screen {
     @Override
     public void dispose() {
         font.dispose();
-        game.batch.dispose();
+        //game.batch.dispose();
+        
     }
 
 //    class TAdapter extends KeyAdapter {
