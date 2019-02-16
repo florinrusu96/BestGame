@@ -1,9 +1,4 @@
-package com.mygdx.game;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+package com.best.bestgame;
 
 /**
  *  This Timer class is intended to create a Timer that runs 
@@ -14,17 +9,15 @@ public class Timer {
     
     private float target;
     private final float quarterTarget;
-    private Image img;
     
     /**
      * 
      * @param target time in seconds 
      * @param path path to Texture
      */
-    public Timer(float target, String path){
+    public Timer(float target){
         this.target = target;
         quarterTarget = target / 4;
-        img = new Image(new Texture(Gdx.files.internal(path)));
     }
     
     /**
@@ -44,16 +37,5 @@ public class Timer {
      */
     public int getSeconds(){
         return Math.round(target);
-    }
-    
-    public Image getImage(){
-        return img;
-    }
-    
-    public void setImage(Image img){
-        this.img = img;
-    }
-    
-    public void dispose(){
     }
 }

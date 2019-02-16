@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.best.bestgame.BestGame;
+import com.best.bestgame.menus.EndGameScreen;
 import com.best.bestgame.menus.InterGameScreen;
 
 import java.util.Timer;
@@ -225,7 +226,11 @@ public class Board implements Screen {
             game.lifePoints--;
             game.score += this.score;
             this.dispose();
-            game.setScreen(new InterGameScreen(game));
+            if(game.lifePoints != 0){
+                game.setScreen(new InterGameScreen(game));
+            }else{
+                game.setScreen(new EndGameScreen(game));
+            }
         }
 
         continueLevel();

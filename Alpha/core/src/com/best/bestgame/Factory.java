@@ -1,6 +1,7 @@
 package com.best.bestgame;
 
 import com.badlogic.gdx.Screen;
+import com.best.bestgame.dropscatcher.GameScreen;
 import java.util.Random;
 import com.best.bestgame.menus.InterGameScreen;
 import com.best.bestgame.pacman.Board;
@@ -11,7 +12,7 @@ import com.best.bestgame.pacman.Board;
  */
 public class Factory {
     private static Factory factory = null;
-    private static final int N_GAMES = 3;
+    private static final int N_GAMES = 4;
     private final Random random;
     private final BestGame game;
     
@@ -29,6 +30,7 @@ public class Factory {
     
     public Screen factory(){
         int index = random.nextInt(N_GAMES);
+        //FLAPPY BIRD  =  0
         if(index == 0){
             if(game.lastScreen instanceof com.best.bestgame.flappybird.PlayScreen){
                 index++;
@@ -36,6 +38,7 @@ public class Factory {
                 return new com.best.bestgame.flappybird.PlayScreen(game);
             }
         }
+        //PACMAN  =  1
         if(index == 1){
             if(game.lastScreen instanceof Board){
                 index++;
@@ -43,7 +46,16 @@ public class Factory {
                 return new Board(game);
             }
         }
+        //DROPS-CATCHER  =  2        
         if(index == 2){
+            if(game.lastScreen instanceof GameScreen){
+                index++;
+            }else{
+                return new GameScreen(game);
+            }
+        }
+        //MAZE  =  3        
+        if(index == 3){
             if(game.lastScreen instanceof com.best.bestgame.maze.PlayScreen){
                 return new com.best.bestgame.flappybird.PlayScreen(game);
             }else{
