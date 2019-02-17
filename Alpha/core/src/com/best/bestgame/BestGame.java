@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
+import com.best.bestgame.menus.EndGameScreen;
 import com.best.bestgame.menus.MainMenuScreen;
 
 public class BestGame extends Game {
@@ -23,7 +24,7 @@ public class BestGame extends Game {
                 lifePoints = 3;
 		batch = new SpriteBatch();
                 lastScreen = null;
-                this.setScreen(new MainMenuScreen(this));
+                this.setScreen(new EndGameScreen(this));
 	}
 
 	@Override

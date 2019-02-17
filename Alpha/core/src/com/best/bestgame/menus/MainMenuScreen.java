@@ -30,7 +30,8 @@ public class MainMenuScreen implements Screen {
     final private Game game;
     private Stage stage;
     private Table table;
-    private Texture texture;
+    private Texture textureBestem;
+    private Texture textureBest;
     
     public MainMenuScreen(final BestGame game) {
         //SETUP STAGE
@@ -57,10 +58,10 @@ public class MainMenuScreen implements Screen {
         table.align(Align.top);
         
         //LOGO BESTEM - title
-        texture = new Texture("menus/logov2.png");
-        Image logo = new Image(texture);
+        textureBestem = new Texture("menus/BESTEM_logo_alb.png");
+        Image logo = new Image(textureBestem);
         table.add(logo).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
-        table.getCell(logo).padBottom(MENU_HEIGHT / 3).padTop(MENU_HEIGHT / 4);
+        table.getCell(logo).padBottom(MENU_HEIGHT / 5).padTop(MENU_HEIGHT / 5);
         table.row();
         
         //PLAY LABEL
@@ -70,8 +71,18 @@ public class MainMenuScreen implements Screen {
                 
         Label pressLabel = new Label("Press anywhere to start", labelStyle);
         table.add(pressLabel);
+        table.getCell(pressLabel).padBottom(MENU_HEIGHT / 5);
+        table.row();
+        
+        //LOGO BEST
+        textureBestem = new Texture("menus/BESTEM_logo_alb.png");
+        Image logoBest = new Image(textureBestem);
+        table.add(logoBest).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
+        table.getCell(logoBest).padBottom(MENU_HEIGHT / 5).padTop(MENU_HEIGHT / 5);
+        table.row();
         
         //ADD TO STAGE
+        table.debug();
         stage.addActor(table);
     }
 
@@ -82,7 +93,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.196f, 0.075f, 0.145f, 1);
+        Gdx.gl.glClearColor(0, 0.6f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         stage.act();
@@ -107,7 +118,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        texture.dispose();
+        textureBestem.dispose();
         stage.dispose();
     }
 

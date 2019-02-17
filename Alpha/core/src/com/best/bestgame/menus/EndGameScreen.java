@@ -74,7 +74,7 @@ public class EndGameScreen implements Screen {
         table.row();
         
         //MIDDLE SCREEN IMAGE
-        texture = new Texture("menus/logov2.png");
+        texture = new Texture("menus/BESTEM_logo_alb.png");
         Image endGameImg = new Image(texture);
         table.add(endGameImg).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
         table.getCell(endGameImg).padBottom(MENU_HEIGHT / 4);
@@ -85,7 +85,9 @@ public class EndGameScreen implements Screen {
         btnTable.setBounds(MENU_WIDTH / 10, MENU_HEIGHT / 12, MENU_WIDTH * 4/5, MENU_HEIGHT / 16);
         btnTable.align(Align.center);
         
-        TextButton backBtn = new TextButton("Back", skin);
+        //BACKBTN
+        char backC = 0x2190; // <- unicode character
+        TextButton backBtn = new TextButton("<-" , skin);
         backBtn.setColor(0.082f, 0.118f, 0.247f,1);
         backBtn.getLabel().setStyle(labelStyle);
         backBtn.addListener(new ClickListener(){
@@ -100,10 +102,28 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(backBtn);
         btnTable.getCell(backBtn).align(Align.left);
-        btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/4);
-        btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 3);
+        btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
+        btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 7);
         
-        TextButton playBtn = new TextButton("Play again", skin);
+        //BESTEMBTN
+        TextButton bestemBtn = new TextButton("BESTEM", skin);
+        bestemBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        bestemBtn.getLabel().setStyle(labelStyle);
+        bestemBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //OPEN BROWSER LINK TO BESTEM
+                Gdx.net.openURI("http://bestbucuresti.ro/bestem");
+            }
+        });
+        btnTable.add(bestemBtn);
+        btnTable.getCell(bestemBtn).align(Align.left);
+        btnTable.getCell(bestemBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/4);
+        btnTable.getCell(bestemBtn).spaceRight(MENU_WIDTH / 7);
+        
+        //PLAYBTN
+        char retryC = 0x21ba; // retry unicode character
+        TextButton playBtn = new TextButton("Retry" + retryC, skin);
         playBtn.setColor(0.082f, 0.118f, 0.247f,1);
         playBtn.getLabel().setStyle(labelStyle);
         playBtn.addListener(new ClickListener(){
@@ -118,11 +138,11 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(playBtn);
         btnTable.getCell(playBtn).align(Align.right);
-        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/4);
+        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
         
         //ADD TO STAGE
         //table.debug();
-        //btnTable.debug();
+        btnTable.debug();
         stage.addActor(table);
         stage.addActor(btnTable);
     }
@@ -136,7 +156,7 @@ public class EndGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.196f, 0.075f, 0.145f, 1);
+        Gdx.gl.glClearColor(0, 0.6f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         
