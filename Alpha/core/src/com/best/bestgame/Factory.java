@@ -46,7 +46,7 @@ public class Factory {
                 return new Board(game);
             }
         }
-        //DROPS-CATCHER  =  2        
+        //DROPS-CATCHER  =  2
         if(index == 2){
             if(game.lastScreen instanceof GameScreen){
                 index++;
@@ -54,7 +54,7 @@ public class Factory {
                 return new GameScreen(game);
             }
         }
-        //MAZE  =  3        
+        //MAZE  =  3
         if(index == 3){
             if(game.lastScreen instanceof com.best.bestgame.maze.PlayScreen){
                 return new com.best.bestgame.flappybird.PlayScreen(game);
