@@ -107,7 +107,7 @@ public class EndGameScreen implements Screen {
         
         //BESTEMBTN
         TextButton bestemBtn = new TextButton("BESTEM", skin);
-        bestemBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        bestemBtn.setColor(0.051f, 0.173f, 0.329f,1);
         bestemBtn.getLabel().setStyle(labelStyle);
         bestemBtn.addListener(new ClickListener(){
             @Override
@@ -123,8 +123,8 @@ public class EndGameScreen implements Screen {
         
         //PLAYBTN
         char retryC = 0x21ba; // retry unicode character
-        TextButton playBtn = new TextButton("Retry" + retryC, skin);
-        playBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        TextButton playBtn = new TextButton("Retry", skin);
+        playBtn.setColor(0.373f, 0.059f, 0.251f,1);
         playBtn.getLabel().setStyle(labelStyle);
         playBtn.addListener(new ClickListener(){
             @Override
@@ -142,7 +142,7 @@ public class EndGameScreen implements Screen {
         
         //ADD TO STAGE
         //table.debug();
-        btnTable.debug();
+        //btnTable.debug();
         stage.addActor(table);
         stage.addActor(btnTable);
     }
