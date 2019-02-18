@@ -82,7 +82,7 @@ public class InterGameScreen implements Screen {
         
         //CONTINUE LABEL
         labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
-        Label pressLabel = new Label("Press anywhere to continue...", labelStyle);
+        Label pressLabel = new Label("Tap anywhere to continue...", labelStyle);
         table.add(pressLabel);
         
         //ADD EVERYTHING TO THE STAGE

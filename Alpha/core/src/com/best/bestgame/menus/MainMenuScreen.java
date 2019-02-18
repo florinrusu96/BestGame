@@ -60,8 +60,8 @@ public class MainMenuScreen implements Screen {
         //LOGO BESTEM - title
         textureBestem = new Texture("menus/BESTEM_logo_alb.png");
         Image logo = new Image(textureBestem);
-        table.add(logo).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
-        table.getCell(logo).padBottom(MENU_HEIGHT / 5).padTop(MENU_HEIGHT / 5);
+        table.add(logo).width(textureBestem.getWidth() / 2).height(textureBestem.getHeight() / 2);
+        table.getCell(logo).padBottom(MENU_HEIGHT / 5).padTop(MENU_HEIGHT / 6);
         table.row();
         
         //PLAY LABEL
@@ -69,17 +69,15 @@ public class MainMenuScreen implements Screen {
         labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
         labelStyle.fontColor = Color.WHITE;
                 
-        Label pressLabel = new Label("Press anywhere to start", labelStyle);
+        Label pressLabel = new Label("Tap anywhere to start", labelStyle);
         table.add(pressLabel);
-        table.getCell(pressLabel).padBottom(MENU_HEIGHT / 5);
+        table.getCell(pressLabel).padBottom(MENU_HEIGHT / 8);
         table.row();
         
         //LOGO BEST
-        textureBestem = new Texture("menus/BESTEM_logo_alb.png");
-        Image logoBest = new Image(textureBestem);
-        table.add(logoBest).width(MENU_WIDTH / 2).height(MENU_WIDTH * 6 / 18);
-        table.getCell(logoBest).padBottom(MENU_HEIGHT / 5).padTop(MENU_HEIGHT / 5);
-        table.row();
+        textureBest = new Texture("menus/BEST_Bucharest.png");
+        Image logoBest = new Image(textureBest);
+        table.add(logoBest).width(textureBest.getWidth() / 5).height(textureBest.getHeight() / 5);
         
         //ADD TO STAGE
         table.debug();
@@ -119,6 +117,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         textureBestem.dispose();
+        textureBest.dispose();
         stage.dispose();
     }
 
