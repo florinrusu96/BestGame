@@ -7,15 +7,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.best.bestgame.BestGame;
@@ -58,7 +61,7 @@ public class EndGameScreen implements Screen {
         //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
-        labelStyle.fontColor = Color.WHITE;
+        labelStyle.fontColor = /*Color.WHITE;*/ new Color(0, 0.6f, 0.8f, 1);
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
         table.add(scoreLabel);
@@ -86,9 +89,9 @@ public class EndGameScreen implements Screen {
         btnTable.align(Align.center);
         
         //BACKBTN
-        char backC = 0x2190; // <- unicode character
+        /*char backC = 0x2190; // <- unicode character
         TextButton backBtn = new TextButton("<-" , skin);
-        backBtn.setColor(0.082f, 0.118f, 0.247f,1);
+        backBtn.setColor(0, 0.494f, 0.655f, 1);
         backBtn.getLabel().setStyle(labelStyle);
         backBtn.addListener(new ClickListener(){
             @Override
@@ -103,11 +106,27 @@ public class EndGameScreen implements Screen {
         btnTable.add(backBtn);
         btnTable.getCell(backBtn).align(Align.left);
         btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
+        btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 7);*/
+        TextureRegionDrawable backImg = new TextureRegionDrawable(new TextureRegion(new Texture("menus/back.png")));
+        ImageButton backBtn = new ImageButton(backImg, backImg);
+        btnTable.add(backBtn);
+        btnTable.getCell(backBtn).align(Align.left);
+        btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
         btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 7);
+        backBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //CHANGE SCREEN -> MAIN MENU SCREEN
+                game.score = 0;
+                game.lifePoints = 3;
+                game.setScreen(new MainMenuScreen(game));
+                dispose();
+            }
+        });
         
         //BESTEMBTN
         TextButton bestemBtn = new TextButton("BESTEM", skin);
-        bestemBtn.setColor(0.051f, 0.173f, 0.329f,1);
+        bestemBtn.setColor(0, 0.494f, 0.655f,1);
         bestemBtn.getLabel().setStyle(labelStyle);
         bestemBtn.addListener(new ClickListener(){
             @Override
@@ -122,9 +141,9 @@ public class EndGameScreen implements Screen {
         btnTable.getCell(bestemBtn).spaceRight(MENU_WIDTH / 7);
         
         //PLAYBTN
-        char retryC = 0x21ba; // retry unicode character
+        /*char retryC = 0x21ba; // retry unicode character
         TextButton playBtn = new TextButton("Retry", skin);
-        playBtn.setColor(0.373f, 0.059f, 0.251f,1);
+        playBtn.setColor(0, 0.494f, 0.655f,1);
         playBtn.getLabel().setStyle(labelStyle);
         playBtn.addListener(new ClickListener(){
             @Override
@@ -138,7 +157,23 @@ public class EndGameScreen implements Screen {
         });
         btnTable.add(playBtn);
         btnTable.getCell(playBtn).align(Align.right);
-        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
+        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);*/
+        TextureRegionDrawable retryImg = new TextureRegionDrawable(new TextureRegion(new Texture("menus/refresh.png")));
+        ImageButton retryBtn = new ImageButton(retryImg, retryImg);
+        btnTable.add(retryBtn);
+        btnTable.getCell(retryBtn).align(Align.left);
+        btnTable.getCell(retryBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
+        btnTable.getCell(retryBtn).spaceRight(MENU_WIDTH / 7);
+        retryBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //CHANGE SCREEN -> MAIN MENU SCREEN
+                game.score = 0;
+                game.lifePoints = 3;
+                game.setScreen(new InterGameScreen(game));
+                dispose();
+            }
+        });
         
         //ADD TO STAGE
         //table.debug();
