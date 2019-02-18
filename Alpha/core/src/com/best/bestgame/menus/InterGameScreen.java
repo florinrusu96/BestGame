@@ -20,6 +20,7 @@ import static com.best.bestgame.BestGame.MENU_HEIGHT;
 import static com.best.bestgame.BestGame.MENU_WIDTH;
 import com.best.bestgame.Factory;
 import com.best.bestgame.Timer;
+import javax.swing.GroupLayout;
 
 /**
  *
@@ -61,6 +62,15 @@ public class InterGameScreen implements Screen {
         livesTable = new Table();
         livesTable.setBounds(0, MENU_HEIGHT / 2, MENU_WIDTH, MENU_HEIGHT / 2);
         livesTable.align(Align.center);
+        
+        //LIVES LABEL
+        Label.LabelStyle livesLabelStyle = new Label.LabelStyle();
+        livesLabelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        livesLabelStyle.fontColor = Color.WHITE;
+        
+        Label livesLabel = new Label("LIVES LEFT", livesLabelStyle);
+        livesLabel.setPosition(MENU_WIDTH / 2, MENU_HEIGHT * 4 /5, Align.center);
+        stage.addActor(livesLabel);
         
         //DRAW LIVES IMAGES
         texture = new Texture("menus/robot.png");
