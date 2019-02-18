@@ -53,7 +53,7 @@ public class PlayScreen implements Screen{
         //set background texture
         bg = new Texture("flappybird/flappy-bg.png");
         //create Sprites
-        bird = new Bird(10, 300);
+        bird = new Bird(10, 600);
         topTube = new Texture("flappybird/toptubev2.png");
         bottomTube = new Texture("flappybird/bottomtubev2.png");
         tubes = new Array();

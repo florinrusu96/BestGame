@@ -24,7 +24,7 @@ public class BestGame extends Game {
                 lifePoints = 3;
 		batch = new SpriteBatch();
                 lastScreen = null;
-                this.setScreen(new EndGameScreen(this));
+                this.setScreen(new MainMenuScreen(this));
 	}
 
 	@Override

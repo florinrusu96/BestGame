@@ -80,7 +80,7 @@ public class MainMenuScreen implements Screen {
         table.add(logoBest).width(textureBest.getWidth() / 5).height(textureBest.getHeight() / 5);
         
         //ADD TO STAGE
-        table.debug();
+        //table.debug();
         stage.addActor(table);
     }
 
