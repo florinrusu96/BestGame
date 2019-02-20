@@ -96,7 +96,7 @@ public class GameScreen implements Screen{
         // all drops
         game.batch.begin();
         game.font.draw(game.batch, "Score: " + dropsGathered, 20, 800 - 20);
-        game.font.draw(game.batch, "" +timer.getSeconds(), camera.viewportWidth - 50, camera.viewportHeight - 20);
+        game.font.draw(game.batch, "" +timer.getSeconds(), camera.viewportWidth - 32, camera.viewportHeight - 20);
         game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
                 game.batch.draw(dropImage, raindrop.x, raindrop.y);

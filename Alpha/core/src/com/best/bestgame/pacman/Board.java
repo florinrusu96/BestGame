@@ -103,9 +103,9 @@ public class Board implements Screen {
     }
 
     private void setupFont() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pacman/myfont.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pacman/dameron.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) (12 * ASPECT_RATIO);
+        parameter.size = 24;
         parameter.color = new Color(96 /255f, 128 / 255f, 1, 1);
         font = generator.generateFont(parameter); // font size 12 pixels
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
@@ -171,12 +171,7 @@ public class Board implements Screen {
     }
 
     private void drawScore() {
-        CharSequence str = "Score: " + score;
-
-        font.draw(game.batch, str, (int) (Gdx.graphics.getWidth() - ASPECT_RATIO * 96),
-                (int) (Gdx.graphics.getHeight() - ASPECT_RATIO * 16));
-        font.draw(game.batch, "" + timer.getSeconds(), (int) (Gdx.graphics.getWidth() / 2 - ASPECT_RATIO * 48),
-                (int) (Gdx.graphics.getHeight() - ASPECT_RATIO * 16));
+        game.drawScoreAndTimerInfo(camera, score, timer.getSeconds());
 
         int i;
         for (i = 0; i < pacsLeft; i++) {
@@ -554,9 +549,13 @@ public class Board implements Screen {
         int random;
 
         for (i = 0; i < N_GHOSTS; i++) {
+            int randomGhostPos;
+            do {
+                randomGhostPos = (int) (Math.random() * N_BLOCKS * N_BLOCKS);
+            } while ((screenData[randomGhostPos] & 16) == 0 && randomGhostPos != pacman_x * N_BLOCKS + pacman_y);
 
-            ghost_y[i] = 4 * BLOCK_SIZE;
-            ghost_x[i] = 4 * BLOCK_SIZE;
+            ghost_y[i] = (randomGhostPos / N_BLOCKS) * BLOCK_SIZE;
+            ghost_x[i] = (randomGhostPos % N_BLOCKS) * BLOCK_SIZE;
             ghost_dy[i] = 0;
             ghost_dx[i] = dx;
             dx = -dx;

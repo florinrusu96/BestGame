@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -39,7 +40,7 @@ public class PlayScreen implements Screen{
     private int tubeIndex = 1;
     
     private Timer timer;
-    
+
     /**
      * Defines the initial screen of the game and initializes all components
      * @param game the actual game that delegates to this screen
@@ -161,8 +162,8 @@ public class PlayScreen implements Screen{
         }
         game.batch.draw(ground, groundPos1.x, groundPos1.y);
         game.batch.draw(ground, groundPos2.x, groundPos2.y);
-        game.font.draw(game.batch, "Score: " + tubeIndex, camera.position.x - camera.viewportWidth / 2 + 20, camera.viewportHeight - 20);
-        game.font.draw(game.batch, "" +timer.getSeconds(), camera.position.x + camera.viewportWidth / 2 - 50, camera.viewportHeight - 20);
+
+        game.drawScoreAndTimerInfo(camera, tubeIndex, timer.getSeconds());
         game.batch.end();
         
         update(delta);

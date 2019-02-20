@@ -135,8 +135,7 @@ public class PlayScreen implements Screen{
         game.batch.draw(bg, 0, 0);
         game.batch.draw(maze, 0, 0);
         game.batch.draw(ghost.getTexture(), ghost.getX(), ghost.getY());
-        game.font.draw(game.batch, "Score: 5", 20, cam.viewportHeight - 20);
-        game.font.draw(game.batch, "" + timer.getSeconds(), cam.position.x + cam.viewportWidth/2 - 50, cam.viewportHeight-20);
+        game.drawScoreAndTimerInfo(cam, 5, timer.getSeconds());
         game.batch.end();
 
         update(delta);

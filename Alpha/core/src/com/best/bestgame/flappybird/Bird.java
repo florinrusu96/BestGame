@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 public class Bird {
     private static final int GRAVITY = -25;
     private static final int MOVEMENT = 120;
+    private static final int BOTTOM_OFFSET = 100;
     
     private Texture texture;
     private Vector3 position;
@@ -25,7 +26,9 @@ public class Bird {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0 ,0 ,0);
         //define bounds
-        bounds = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
+
+        // setam inaltimea mai mica pentru ca vrem sa luam in considerare doar robotul fara bula de jos
+        bounds = new Rectangle(x, y, texture.getWidth(),(int)(.75 * texture.getHeight()));
     }
     
     public void update(float delta){
@@ -39,9 +42,16 @@ public class Bird {
         }else if(position.y > PlayScreen.V_HEIGHT){
             position.y = PlayScreen.V_HEIGHT;
         }
-        bounds.setPosition(position.x, position.y);
+        updatePosition();
         velocity.scl(1/delta);
         
+    }
+
+    /**
+     * setam pozitia mai sus pentru ca vrem sa luam in considerare doar robotul fara bula de jos
+     */
+    private void updatePosition() {
+        bounds.setPosition(position.x, position.y + texture.getHeight() / 4);
     }
 
     /**
@@ -57,7 +67,7 @@ public class Bird {
      * @return boolean value
      */
     public boolean collides(Tube tube){
-        if(bounds.overlaps(tube.getBottomBounds()) || bounds.overlaps(tube.getTopBounds())){
+        if(collides(tube.getBottomBounds()) || collides(tube.getTopBounds())){
             return true;
         }
         return false;
