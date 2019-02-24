@@ -14,9 +14,9 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Ghost {
 
-    private static final int START_X = 80;
-    private static final int START_Y = 100;
-    private static final int SIZE = 10;
+    private static final int START_X = 40;
+    private static final int START_Y = 45;
+    private static final int SIZE = 25;
     private OrthographicCamera cam;
 
     private Texture texture;
@@ -26,10 +26,10 @@ public class Ghost {
     public Ghost(OrthographicCamera cam){
         this.cam = cam;
         //initialize texture and initial position
-        texture = new Texture("maze/mazeghost.png");
+        texture = new Texture("maze/ghosthead25.png");
         position = new Vector3(START_X, START_Y, 0);
         //initialize rectangle representing bounds
-        bounds = new Rectangle(START_X, START_Y, SIZE, SIZE);
+        bounds = new Rectangle(START_X, START_Y, SIZE - 5, SIZE);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ghost {
                 position.y += yDistance * delta;
             }
             //update bounds
-            bounds.setPosition(position.x, position.y);
+            bounds.setPosition(position.x + 5, position.y);
         }
     }
 

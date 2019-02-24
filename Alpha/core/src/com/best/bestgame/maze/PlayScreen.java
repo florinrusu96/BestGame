@@ -20,14 +20,14 @@ import com.best.bestgame.menus.InterGameScreen;
  */
 public class PlayScreen implements Screen{
 
-    private static final int BOUNDS_COUNT = 5;
+    private static final int BOUNDS_COUNT = 16;
 
     private BestGame game;
 
     private Texture bg;
     private Texture maze;
     private Array<Rectangle> mazeBounds;
-    private Rectangle finishLine;
+    private Rectangle finishLine1, finishLine2;
     private Ghost ghost;
 
     private OrthographicCamera cam;
@@ -40,28 +40,49 @@ public class PlayScreen implements Screen{
      */
     public PlayScreen(final BestGame game){
         this.game = game;
-        timer = new Timer(8);
+        timer = new Timer(60);
         //define camera and viewport
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, 480, 480);
+        cam.setToOrtho(false, 480, 800);
         //initialize textures
-        bg = new Texture("maze/mazebg.png");
-        maze = new Texture("maze/maze.png");
+        bg = new Texture("maze/mazebg-01.png");
+        maze = new Texture("maze/maze-01.png");
         //initialize ghost
         ghost = new Ghost(cam);
         //initialize maze bounds and finish line
-        //numbers were obtained when i created the maze
-        mazeBounds = new Array<Rectangle>();
-        mazeBounds.add(new Rectangle(70, 90, 340, 40));
-        mazeBounds.add(new Rectangle(370, 130, 40, 130));
-        mazeBounds.add(new Rectangle(100, 260, 310, 40));
-        mazeBounds.add(new Rectangle(100, 300, 40, 110));
-        mazeBounds.add(new Rectangle(140, 368, 134, 42));
-        finishLine = new Rectangle(274, 366, 14, 46);
+        initBounds();
     }
 
     @Override
     public void show() {
+    }
+    
+    private void initBounds() {
+        mazeBounds = new Array<Rectangle>();
+        mazeBounds.add(new Rectangle(37.76f, 42.41f, 91.77f, 49f));
+        mazeBounds.add(new Rectangle(37.76f, 42.41f, 49f, 198f));
+        mazeBounds.add(new Rectangle(37.76f, 191.44f, 173.84f, 49f));
+        
+        mazeBounds.add(new Rectangle(161.61f, 42.41f, 50f, 219.95f));
+        mazeBounds.add(new Rectangle(161.61f, 42.41f, 283.46f, 49f));
+        mazeBounds.add(new Rectangle(396.07f, 42.41f, 49f, 551.46f));
+        
+        mazeBounds.add(new Rectangle(161.61f, 213.36f, 283.46f, 49f));
+        mazeBounds.add(new Rectangle(161.61f, 289.56f, 283.46f, 49f));
+        
+        mazeBounds.add(new Rectangle(277.27f, 289.56f, 49f, 167.84f)); 
+        mazeBounds.add(new Rectangle(161.61f, 408.4f, 164.66f, 49f));
+        mazeBounds.add(new Rectangle(161.61f, 289.56f, 49f, 167.84f));
+       
+        mazeBounds.add(new Rectangle(160.61f, 544.86f, 284.46f, 49f));
+        mazeBounds.add(new Rectangle(160.61f, 478.74f, 49f, 115.12f));
+        mazeBounds.add(new Rectangle(38.92f, 478.74f, 170.69f, 49f));
+       
+        mazeBounds.add(new Rectangle(38.92f, 478.74f, 49f, 242f));
+        mazeBounds.add(new Rectangle(38.92f, 617.9f, 406.15f, 49f));
+
+        finishLine1 = new Rectangle(38.92f, 719f, 49f, 1f);
+        finishLine2 = new Rectangle(443f, 617.9f, 1f, 49f );
     }
 
     /**
@@ -73,7 +94,7 @@ public class PlayScreen implements Screen{
         ghost.update(delta);
         //check collision with finish line
         /*GAME SCREEN CHANGES HERE*/
-        if(ghost.getBounds().overlaps(finishLine)){
+        if(ghost.getBounds().overlaps(finishLine1) || ghost.getBounds().overlaps(finishLine2)){
             game.lastScreen = this;
             game.score += 100;
             this.dispose();
@@ -83,19 +104,11 @@ public class PlayScreen implements Screen{
         //check collision with maze bounds
         boolean isInside = false;
         Rectangle ghostBounds = ghost.getBounds();
-        for(int i = 0; i < BOUNDS_COUNT - 1; i++){
+        for(int i = 0; i < BOUNDS_COUNT; i++){
             if(mazeBounds.get(i).contains(ghostBounds)){
                 isInside = true;
                 break;
-            }else if(ghostBounds.overlaps(mazeBounds.get(i)) &&
-                    ghostBounds.overlaps(mazeBounds.get(i+1))){
-                isInside = true;
-                break;
             }
-        }
-        //check for the last one too
-        if(mazeBounds.get(BOUNDS_COUNT-1).contains(ghostBounds)){
-            isInside = true;
         }
         //game lost
         /*GAME SCREEN CHANGES HERE*/
