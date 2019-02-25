@@ -89,24 +89,6 @@ public class EndGameScreen implements Screen {
         btnTable.align(Align.center);
         
         //BACKBTN
-        /*char backC = 0x2190; // <- unicode character
-        TextButton backBtn = new TextButton("<-" , skin);
-        backBtn.setColor(0, 0.494f, 0.655f, 1);
-        backBtn.getLabel().setStyle(labelStyle);
-        backBtn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //CHANGE SCREEN -> MAIN MENU SCREEN
-                game.score = 0;
-                game.lifePoints = 3;
-                game.setScreen(new MainMenuScreen(game));
-                dispose();
-            }
-        });
-        btnTable.add(backBtn);
-        btnTable.getCell(backBtn).align(Align.left);
-        btnTable.getCell(backBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);
-        btnTable.getCell(backBtn).spaceRight(MENU_WIDTH / 7);*/
         TextureRegionDrawable backImg = new TextureRegionDrawable(new TextureRegion(new Texture("menus/back.png")));
         ImageButton backBtn = new ImageButton(backImg, backImg);
         btnTable.add(backBtn);
@@ -141,23 +123,6 @@ public class EndGameScreen implements Screen {
         btnTable.getCell(bestemBtn).spaceRight(MENU_WIDTH / 7);
         
         //PLAYBTN
-        /*char retryC = 0x21ba; // retry unicode character
-        TextButton playBtn = new TextButton("Retry", skin);
-        playBtn.setColor(0, 0.494f, 0.655f,1);
-        playBtn.getLabel().setStyle(labelStyle);
-        playBtn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //CHANGE SCREEN -> NEW GAME SCREEN
-                game.lifePoints = 3;
-                game.score = 0;
-                game.setScreen(new InterGameScreen(game));
-                dispose();
-            }
-        });
-        btnTable.add(playBtn);
-        btnTable.getCell(playBtn).align(Align.right);
-        btnTable.getCell(playBtn).height(MENU_HEIGHT/16).width(MENU_WIDTH/8);*/
         TextureRegionDrawable retryImg = new TextureRegionDrawable(new TextureRegion(new Texture("menus/refresh.png")));
         ImageButton retryBtn = new ImageButton(retryImg, retryImg);
         btnTable.add(retryBtn);
@@ -170,7 +135,7 @@ public class EndGameScreen implements Screen {
                 //CHANGE SCREEN -> MAIN MENU SCREEN
                 game.score = 0;
                 game.lifePoints = 3;
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, 0));
                 dispose();
             }
         });

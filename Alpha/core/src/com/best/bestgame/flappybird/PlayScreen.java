@@ -107,7 +107,7 @@ public class PlayScreen implements Screen{
                 game.score += tubeIndex;
                 game.getScreen().dispose();
                 if(game.lifePoints != 0){
-                    game.setScreen(new InterGameScreen(game));
+                    game.setScreen(new InterGameScreen(game, tubeIndex));
                 }else{
                     game.setScreen(new EndGameScreen(game));
                 }
@@ -130,7 +130,7 @@ public class PlayScreen implements Screen{
             game.score += tubeIndex;
             game.getScreen().dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, tubeIndex));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }
@@ -147,7 +147,7 @@ public class PlayScreen implements Screen{
             game.score += 100;
             game.lastScreen = this;
             dispose();
-            game.setScreen(new InterGameScreen(game));
+            game.setScreen(new InterGameScreen(game, 100));
             return;
         }
         

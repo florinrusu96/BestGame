@@ -226,7 +226,7 @@ public class Board implements Screen {
             game.score += this.score;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, this.score));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }
@@ -613,7 +613,7 @@ public class Board implements Screen {
             game.score += score;
             game.lastScreen = this;
             this.dispose();
-            game.setScreen(new InterGameScreen(game));
+            game.setScreen(new InterGameScreen(game, score));
         }
         
         checkInput();

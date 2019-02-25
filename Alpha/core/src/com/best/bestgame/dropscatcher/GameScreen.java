@@ -87,7 +87,7 @@ public class GameScreen implements Screen{
         if(!timer.update(delta)){
             game.score += 100;
             game.lastScreen = this;
-            game.setScreen(new InterGameScreen(game));
+            game.setScreen(new InterGameScreen(game, 100));
             this.dispose();
             //return;
         }
@@ -155,7 +155,7 @@ public class GameScreen implements Screen{
             game.lastScreen = this;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, dropsGathered));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }

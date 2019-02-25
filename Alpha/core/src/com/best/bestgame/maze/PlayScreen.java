@@ -98,7 +98,7 @@ public class PlayScreen implements Screen{
             game.lastScreen = this;
             game.score += 100;
             this.dispose();
-            game.setScreen(new InterGameScreen(game));
+            game.setScreen(new InterGameScreen(game, 100));
             return;
         }
         //check collision with maze bounds
@@ -118,7 +118,7 @@ public class PlayScreen implements Screen{
             game.lifePoints--;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, 5));
             }else{
                 game.setScreen(new EndGameScreen(game));            
             }
@@ -136,7 +136,7 @@ public class PlayScreen implements Screen{
             game.lifePoints--;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game));
+                game.setScreen(new InterGameScreen(game, 5));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }

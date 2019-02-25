@@ -44,7 +44,7 @@ public class MainMenuScreen implements Screen {
                stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
                    @Override
                    public void run() {
-                       game.setScreen(new InterGameScreen(game));
+                       game.setScreen(new InterGameScreen(game, 0));
                        dispose();
                    }
                })));
@@ -75,9 +75,9 @@ public class MainMenuScreen implements Screen {
         table.row();
         
         //LOGO BEST
-        textureBest = new Texture("menus/BEST_Bucharest.png");
+        textureBest = new Texture("menus/BEST_white.png");
         Image logoBest = new Image(textureBest);
-        table.add(logoBest).width(textureBest.getWidth() / 5).height(textureBest.getHeight() / 5);
+        table.add(logoBest).width(textureBest.getWidth()).height(textureBest.getHeight());
         
         //ADD TO STAGE
         //table.debug();

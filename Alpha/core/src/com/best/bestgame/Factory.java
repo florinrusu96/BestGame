@@ -65,7 +65,7 @@ public class Factory {
             }
         }
         if(index >= N_GAMES){
-            return new InterGameScreen(game);
+            return new InterGameScreen(game, 0);
         }
         return null;
     }

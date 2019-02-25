@@ -37,7 +37,7 @@ public class InterGameScreen implements Screen {
     private boolean canContinue;
     private Timer timer;
     
-    public InterGameScreen(final BestGame game) {
+    public InterGameScreen(final BestGame game, int levelScore) {
         //SETUP STAGE
         this.game = game;
         timer = new Timer(1);
@@ -85,7 +85,7 @@ public class InterGameScreen implements Screen {
         labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
         labelStyle.fontColor = Color.WHITE;
         
-        Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
+        Label scoreLabel = new Label("SCORE: " + levelScore + "\nTOTAL: " + game.score, labelStyle);
         table.add(scoreLabel);
         table.getCell(scoreLabel).padBottom(MENU_HEIGHT / 10);
         table.row();
