@@ -73,7 +73,7 @@ public class InterGameScreen implements Screen {
         stage.addActor(livesLabel);
         
         //DRAW LIVES IMAGES
-        texture = new Texture("menus/robot.png");
+        texture = new Texture("menus/thumbs.png");
         for(int i = 0; i < game.lifePoints; i++){
             Image robotLife = new Image(texture);
             livesTable.add(robotLife).width(robotLife.getWidth()/4).height(robotLife.getHeight()/4);
