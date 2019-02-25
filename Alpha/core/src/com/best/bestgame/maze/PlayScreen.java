@@ -33,6 +33,7 @@ public class PlayScreen implements Screen{
     private OrthographicCamera cam;
 
     private Timer timer;
+    private int score;
     
     /**
      * Setup of the game components.
@@ -92,13 +93,19 @@ public class PlayScreen implements Screen{
      */
     private void update(float delta){
         ghost.update(delta);
+        if(ghost.getY() / 10 - 5 > score)
+            score = (int)ghost.getY() / 10 - 5;
         //check collision with finish line
         /*GAME SCREEN CHANGES HERE*/
         if(ghost.getBounds().overlaps(finishLine1) || ghost.getBounds().overlaps(finishLine2)){
             game.lastScreen = this;
-            game.score += 100;
+            if(ghost.getBounds().overlaps(finishLine2)){
+                score += 10;
+            }
+            score += timer.getSeconds();
+            game.score += score;
             this.dispose();
-            game.setScreen(new InterGameScreen(game, 100));
+            game.setScreen(new InterGameScreen(game, score));
             return;
         }
         //check collision with maze bounds
@@ -114,11 +121,11 @@ public class PlayScreen implements Screen{
         /*GAME SCREEN CHANGES HERE*/
         if(!isInside){
             game.lastScreen = this;
-            game.score += 5;
+            game.score += score;
             game.lifePoints--;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game, 5));
+                game.setScreen(new InterGameScreen(game, score));
             }else{
                 game.setScreen(new EndGameScreen(game));            
             }
@@ -132,11 +139,11 @@ public class PlayScreen implements Screen{
         
         if(!timer.update(delta)){
             game.lastScreen = this;
-            game.score += 5;
+            game.score += score;
             game.lifePoints--;
             this.dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game, 5));
+                game.setScreen(new InterGameScreen(game, score));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }
@@ -148,7 +155,7 @@ public class PlayScreen implements Screen{
         game.batch.draw(bg, 0, 0);
         game.batch.draw(maze, 0, 0);
         game.batch.draw(ghost.getTexture(), ghost.getX(), ghost.getY());
-        game.drawScoreAndTimerInfo(cam, 5, timer.getSeconds());
+        game.drawScoreAndTimerInfo(cam, score, timer.getSeconds());
         game.batch.end();
 
         update(delta);
