@@ -43,7 +43,7 @@ public class GameScreen implements Screen{
         // load the images for the droplet and the bucket, 64x64 pixels each
         dropImage = new Texture(Gdx.files.internal("dropscatcher/nut.png"));
         bucketImage = new Texture(Gdx.files.internal("dropscatcher/catcher.png"));
-        bg = new Texture(Gdx.files.internal("dropscatcher/bg.png"));
+        bg = new Texture(Gdx.files.internal("dropscatcher/bg_iul.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
