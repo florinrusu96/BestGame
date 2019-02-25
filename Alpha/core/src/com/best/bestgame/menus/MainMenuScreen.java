@@ -66,7 +66,8 @@ public class MainMenuScreen implements Screen {
         
         //PLAY LABEL
         LabelStyle labelStyle = new LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
+        //labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
+        labelStyle.font = game.menusFont;
         labelStyle.fontColor = Color.WHITE;
                 
         Label pressLabel = new Label("Tap anywhere to start", labelStyle);

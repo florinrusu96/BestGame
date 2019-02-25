@@ -65,7 +65,8 @@ public class InterGameScreen implements Screen {
         
         //LIVES LABEL
         Label.LabelStyle livesLabelStyle = new Label.LabelStyle();
-        livesLabelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        //livesLabelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        livesLabelStyle.font = game.menusFont;
         livesLabelStyle.fontColor = Color.WHITE;
         
         Label livesLabel = new Label("LIVES LEFT", livesLabelStyle);
@@ -82,7 +83,8 @@ public class InterGameScreen implements Screen {
         
         //SCORE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        //labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        labelStyle.font = game.menusFontBig;
         labelStyle.fontColor = Color.WHITE;
         
         Label scoreLabel = new Label("SCORE: " + levelScore + "\nTOTAL: " + game.score, labelStyle);
@@ -91,7 +93,7 @@ public class InterGameScreen implements Screen {
         table.row();
         
         //CONTINUE LABEL
-        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana25.fnt"));
+        labelStyle.font = game.menusFont;
         Label pressLabel = new Label("Tap anywhere to continue...", labelStyle);
         table.add(pressLabel);
         

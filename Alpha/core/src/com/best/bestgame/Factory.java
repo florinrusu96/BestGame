@@ -30,7 +30,7 @@ public class Factory {
     
     public Screen factory(){
         int index = random.nextInt(N_GAMES);
-        //return new com.best.bestgame.maze.PlayScreen(game);
+        //return new GameScreen(game);
 
         //FLAPPY BIRD  =  0
         if(index == 0){

@@ -60,7 +60,8 @@ public class EndGameScreen implements Screen {
         
         //SCORE LABEL AND LABEL STYLE
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        //labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana32.fnt"));
+        labelStyle.font = game.menusFontBig;
         labelStyle.fontColor = /*Color.WHITE;*/ new Color(0, 0.6f, 0.8f, 1);
         
         Label scoreLabel = new Label("SCORE: " + game.score, labelStyle);
@@ -69,7 +70,7 @@ public class EndGameScreen implements Screen {
         table.row();
         
         //MESSAGE LABEL
-        labelStyle.font = new BitmapFont(Gdx.files.internal("menus/fonts/verdana22.fnt"));
+        labelStyle.font = game.menusFont;
         Label msg = new Label(messages[new Random().nextInt(5)] + "Come register for BESTEM!", labelStyle);
         msg.setAlignment(Align.center);
         table.add(msg);

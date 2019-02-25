@@ -21,12 +21,14 @@ public class BestGame extends Game {
         public static final int MENU_WIDTH = 480;
         public static final int MENU_HEIGHT = 800;
         public BitmapFont font;
+        public BitmapFont menusFont;
+        public BitmapFont menusFontBig;
 
 	private GlyphLayout glyphLayoutHelper;
 	
 	@Override
 	public void create () {
-				setupFont();
+                setupFont();
                 lifePoints = 3;
 		batch = new SpriteBatch();
                 lastScreen = null;
@@ -39,8 +41,17 @@ public class BestGame extends Game {
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.size = 24;
 		parameter.color = new Color(255 /255f, 255 / 255f, 1, 1);
-		font = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		font = generator.generateFont(parameter); // font size 24 pixels -> HUD
+		generator.dispose();
+                
+                generator = new FreeTypeFontGenerator(Gdx.files.internal("Lovelo-Black.ttf"));
+                parameter.size = 20;
+                parameter.color = Color.WHITE;
+                menusFont = generator.generateFont(parameter);
+                
+                parameter.size = 40;
+                menusFontBig = generator.generateFont(parameter);
+                generator.dispose();
 	}
 
 	@Override
