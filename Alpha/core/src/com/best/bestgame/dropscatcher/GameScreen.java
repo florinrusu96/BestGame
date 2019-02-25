@@ -19,10 +19,13 @@ import com.best.bestgame.menus.InterGameScreen;
  */
 public class GameScreen implements Screen{
     
+    private static final int NUT_SIZE = 32;
+    
     final BestGame game;
     
     Texture dropImage;
     Texture bucketImage;
+    Texture bg;
     OrthographicCamera camera;
     Rectangle bucket;
     Array<Rectangle> raindrops;
@@ -38,20 +41,21 @@ public class GameScreen implements Screen{
         timer = new Timer(10);
         
         // load the images for the droplet and the bucket, 64x64 pixels each
-        dropImage = new Texture(Gdx.files.internal("dropscatcher/droplet.png"));
-        bucketImage = new Texture(Gdx.files.internal("dropscatcher/bucket.png"));
+        dropImage = new Texture(Gdx.files.internal("dropscatcher/nut.png"));
+        bucketImage = new Texture(Gdx.files.internal("dropscatcher/catcher.png"));
+        bg = new Texture(Gdx.files.internal("dropscatcher/bg.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 400, 800);
+        camera.setToOrtho(false, 480, 800);
 
         // create a Rectangle to logically represent the bucket
         bucket = new Rectangle();
-        bucket.x = 400 / 2 - 64 / 2; // center the bucket horizontally
-        bucket.y = 20; // bottom left corner of the bucket is 20 pixels above
+        bucket.x = 480 / 2 - bucket.width / 2; // center the bucket horizontally
+        bucket.y = 70; // bottom left corner of the bucket is 20 pixels above
                                         // the bottom screen edge
-        bucket.width = 64;
-        bucket.height = 64;
+        bucket.width = bucketImage.getWidth() /4;
+        bucket.height = bucketImage.getHeight() /4;
 
         // create the raindrops array and spawn the first raindrop
         raindrops = new Array<Rectangle>();
@@ -60,10 +64,10 @@ public class GameScreen implements Screen{
     
     private void spawnRaindrop() {
         Rectangle raindrop = new Rectangle();
-        raindrop.x = MathUtils.random(0, 400 - 64);
+        raindrop.x = MathUtils.random(0, 480 - NUT_SIZE);
         raindrop.y = 800;
-        raindrop.width = 64;
-        raindrop.height = 64;
+        raindrop.width = NUT_SIZE;
+        raindrop.height = NUT_SIZE;
         raindrops.add(raindrop);
         lastDropTime = TimeUtils.nanoTime();
     }
@@ -95,11 +99,12 @@ public class GameScreen implements Screen{
         // begin a new batch and draw the bucket and
         // all drops
         game.batch.begin();
+        game.batch.draw(bg, 0, 0);
         game.font.draw(game.batch, "Score: " + dropsGathered, 20, 800 - 20);
         game.font.draw(game.batch, "" +timer.getSeconds(), camera.viewportWidth - 32, camera.viewportHeight - 20);
         game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
-                game.batch.draw(dropImage, raindrop.x, raindrop.y);
+                game.batch.draw(dropImage, raindrop.x, raindrop.y, NUT_SIZE, NUT_SIZE);
         }
         game.batch.end();
 
@@ -108,7 +113,7 @@ public class GameScreen implements Screen{
                 Vector3 touchPos = new Vector3();
                 touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
                 camera.unproject(touchPos);
-                bucket.x = touchPos.x - 64 / 2;
+                bucket.x = touchPos.x - bucket.width / 2;
         }
         if (Gdx.input.isKeyPressed(Keys.LEFT))
                 bucket.x -= 300 * Gdx.graphics.getDeltaTime();
@@ -118,8 +123,8 @@ public class GameScreen implements Screen{
         // make sure the bucket stays within the screen bounds
         if (bucket.x < 0)
                 bucket.x = 0;
-        if (bucket.x > 400 - 64)
-                bucket.x = 400 - 64;
+        if (bucket.x > 480 - bucket.width)
+                bucket.x = 480 - bucket.width;
 
         // check if we need to create a new raindrop
         if (TimeUtils.nanoTime() - lastDropTime > 250000000)
@@ -131,7 +136,7 @@ public class GameScreen implements Screen{
         for(int i = 0; i < raindrops.size; i++){
             Rectangle raindrop = raindrops.get(i);
             raindrop.y -= 300 * delta;
-            if (raindrop.y < 0){
+            if (raindrop.y < 70){
                     raindrops.removeIndex(i);
                     i--;
                     /*CHANGE SCREEN HERE - LOST GAME*/
@@ -181,6 +186,7 @@ public class GameScreen implements Screen{
     public void dispose() {
         dropImage.dispose();
         bucketImage.dispose();
+        bg.dispose();
     }
     
 }
