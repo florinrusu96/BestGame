@@ -8,9 +8,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.best.bestgame.menus.MainMenuScreen;
+import com.best.bestgame.score.ScoreListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BestGame extends Game {
 	public SpriteBatch batch;
@@ -23,6 +26,12 @@ public class BestGame extends Game {
         public BitmapFont font;
 
 	private GlyphLayout glyphLayoutHelper;
+
+	private List<ScoreListener> scoreListenerList;
+
+	public BestGame() {
+		scoreListenerList = new ArrayList<ScoreListener>();
+	}
 	
 	@Override
 	public void create () {
@@ -66,5 +75,19 @@ public class BestGame extends Game {
 		font.draw(batch, "Score: " + score, camera.position.x - camera.viewportWidth / 2 + 20, camera.viewportHeight - 20);
 		font.draw(batch, timerValue, camera.position.x + camera.viewportWidth / 2 - timerStartPoint - 20, camera.viewportHeight - 20);
 
+	}
+
+	public void broadcastScore(int score) {
+		for (ScoreListener listener : scoreListenerList) {
+			listener.scoreChanged(score);
+		}
+	}
+
+	public void registerScoreListener(ScoreListener listener) {
+		scoreListenerList.add(listener);
+	}
+
+	public void unregisterScoreListener(ScoreListener listener) {
+		scoreListenerList.remove(listener);
 	}
 }

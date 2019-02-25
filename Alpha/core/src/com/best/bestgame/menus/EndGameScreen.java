@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public class EndGameScreen implements Screen {
 
-    final private Game game;
+    final private BestGame game;
     private Stage stage;
     private Table table;
     private Table btnTable;
@@ -184,6 +184,7 @@ public class EndGameScreen implements Screen {
 
     @Override
     public void show() {
+        game.broadcastScore(game.score);
         Gdx.input.setInputProcessor(stage);
         stage.addAction(Actions.alpha(0));
         stage.addAction(Actions.fadeIn(0.5f));

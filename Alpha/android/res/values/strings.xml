@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">BestGame</string>
-
+    <string name="log_in_success">Logarea s-a finalizat cu succes</string>
+    <string name="client_id" translatable="false">248343923614-057k195htochl4i8t0ai1bo57metjbik.apps.googleusercontent.com</string>
+    <string name="leaderboard_id" translatable="false">CgkIx5H3-oAaEAIQAA</string>
+    <string name="score_submit_error">Nu am reusit sa inregistram scorul</string>
 </resources>
