@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.best.bestgame.Timer;
 
 /**
  *Describes everything about the main character.
@@ -14,14 +15,16 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Ghost {
 
-    private static final int START_X = 40;
-    private static final int START_Y = 45;
+    private static final int START_X = 95;
+    private static final int START_Y = 55;
     private static final int SIZE = 25;
     private OrthographicCamera cam;
 
     private Texture texture;
     private Vector3 position;
     private Rectangle bounds;
+    
+    private Timer ghostTimer;
 
     public Ghost(OrthographicCamera cam){
         this.cam = cam;
@@ -30,6 +33,8 @@ public class Ghost {
         position = new Vector3(START_X, START_Y, 0);
         //initialize rectangle representing bounds
         bounds = new Rectangle(START_X, START_Y, SIZE - 5, SIZE);
+        //initialize input timer
+        ghostTimer = new Timer(0.2f);
     }
 
     /**
@@ -39,7 +44,7 @@ public class Ghost {
      * @param delta
      */
     public void update(float delta){
-        if(Gdx.input.isTouched()){
+        if(Gdx.input.isTouched() && !ghostTimer.update(delta)){
             //get coordinates in GameWorld coordinates
             Vector3 touchPos = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             //formulas for distance
