@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Bird {
     private static final int GRAVITY = -25;
-    private static final int MOVEMENT = 120;
+    private static final int MOVEMENT = 140;
     private static final int BOTTOM_OFFSET = 100;
     
     private Texture texture;

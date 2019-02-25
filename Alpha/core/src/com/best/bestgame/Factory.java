@@ -30,10 +30,10 @@ public class Factory {
     
     public Screen factory(){
         int index = random.nextInt(N_GAMES);
-        return new Board(game);
+        //return new GameScreen(game);
 
         //FLAPPY BIRD  =  0
-        /*if(index == 0){
+        if(index == 0){
             if(game.lastScreen instanceof com.best.bestgame.flappybird.PlayScreen){
                 index++;
             }else{
@@ -67,7 +67,7 @@ public class Factory {
         if(index >= N_GAMES){
             return new InterGameScreen(game, 0);
         }
-        return null;*/
+        return null;
     }
     
 }

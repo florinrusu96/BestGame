@@ -85,9 +85,9 @@ public class GameScreen implements Screen{
         camera.update();
         /*CHANGE SCREEN HERE - TIMER UP */
         if(!timer.update(delta)){
-            game.score += 100;
+            game.score += dropsGathered;
             game.lastScreen = this;
-            game.setScreen(new InterGameScreen(game, 100));
+            game.setScreen(new InterGameScreen(game, dropsGathered));
             this.dispose();
             //return;
         }
@@ -143,7 +143,7 @@ public class GameScreen implements Screen{
                     gameLost = true;
             }
             else if (raindrop.overlaps(bucket)) {
-                    dropsGathered++;
+                    dropsGathered += (int)(Math.random() * 3+1);
                     raindrops.removeIndex(i);
                     i--;
             }

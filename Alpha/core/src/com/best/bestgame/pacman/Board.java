@@ -87,7 +87,7 @@ public class Board implements Screen {
 
     public Board(final BestGame game) {
         this.game = game;
-        this.timer = new Timer(30);
+        this.timer = new Timer(20);
         
         game.batch.getProjectionMatrix().setToOrtho2D(0, 0,
                 Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());

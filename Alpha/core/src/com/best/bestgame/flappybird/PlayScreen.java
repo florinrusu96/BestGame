@@ -38,6 +38,7 @@ public class PlayScreen implements Screen{
     private Bird bird;
     private Array<Tube> tubes;
     private int tubeIndex = 1;
+    private int score;
     
     private Timer timer;
 
@@ -99,15 +100,16 @@ public class PlayScreen implements Screen{
             if(tube.getTopPosition().x + Tube.TUBE_WIDTH < camera.position.x - (camera.viewportWidth / 2)){
                 tube.reposition(tubeIndex * TUBE_SPACING);
                 tubeIndex++;
+                score += (int)(Math.random() * 4 + 4) ;
             }
             /*SCREEN CHANGING HERE*/
             if(bird.collides(tube)){
                 game.lastScreen = this;
                 game.lifePoints--;
-                game.score += tubeIndex;
+                game.score += score;
                 game.getScreen().dispose();
                 if(game.lifePoints != 0){
-                    game.setScreen(new InterGameScreen(game, tubeIndex));
+                    game.setScreen(new InterGameScreen(game, score));
                 }else{
                     game.setScreen(new EndGameScreen(game));
                 }
@@ -127,10 +129,10 @@ public class PlayScreen implements Screen{
         if(bird.collides(groundBounds1) || bird.collides(groundBounds2)){
             game.lastScreen = this;
             game.lifePoints--;
-            game.score += tubeIndex;
+            game.score += score;
             game.getScreen().dispose();
             if(game.lifePoints != 0){
-                game.setScreen(new InterGameScreen(game, tubeIndex));
+                game.setScreen(new InterGameScreen(game, score));
             }else{
                 game.setScreen(new EndGameScreen(game));
             }
@@ -144,10 +146,10 @@ public class PlayScreen implements Screen{
         
         // CHANGE SCREEN HERE -> TIME IS UP
         if(!timer.update(delta)){
-            game.score += 100;
+            game.score += score;
             game.lastScreen = this;
             dispose();
-            game.setScreen(new InterGameScreen(game, 100));
+            game.setScreen(new InterGameScreen(game, score));
             return;
         }
         
@@ -163,7 +165,7 @@ public class PlayScreen implements Screen{
         game.batch.draw(ground, groundPos1.x, groundPos1.y);
         game.batch.draw(ground, groundPos2.x, groundPos2.y);
 
-        game.drawScoreAndTimerInfo(camera, tubeIndex, timer.getSeconds());
+        game.drawScoreAndTimerInfo(camera, score, timer.getSeconds());
         game.batch.end();
         
         update(delta);
