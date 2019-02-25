@@ -50,6 +50,7 @@ public class Board implements Screen {
     private Texture pacman1, pacman2up, pacman2left, pacman2right, pacman2down;
     private Texture pacman3up, pacman3down, pacman3left, pacman3right;
     private Texture pacman4up, pacman4down, pacman4left, pacman4right;
+    private Texture bg;
 
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy, view_dx, view_dy;
@@ -464,6 +465,11 @@ public class Board implements Screen {
     }
 
     private void drawMaze() {
+        game.batch.setProjectionMatrix(camera.combined);
+        game.batch.begin();
+        game.batch.draw(bg, 0, SCREEN_SIZE + startY, Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
+        game.batch.end();
+        
         if(mazeShapeRenderer != null) {
             mazeShapeRenderer.dispose();
         }
@@ -475,6 +481,8 @@ public class Board implements Screen {
         int x, y;
 
         mazeShapeRenderer.rect(0, 0, 10, 10);
+        
+        
         for (y = startY; y < startY + SCREEN_SIZE; y += BLOCK_SIZE) {
             for (x = startX; x < startX + SCREEN_SIZE; x += BLOCK_SIZE) {
                 mazeShapeRenderer.setColor(mazeColor);
@@ -519,6 +527,7 @@ public class Board implements Screen {
             }
         }
         mazeShapeRenderer.end();
+        
     }
 
     private void initGame() {
@@ -580,21 +589,21 @@ public class Board implements Screen {
     }
 
     private void loadImages() {
-        ghost = new Texture("pacman/images/Ghost.png");
-        pacman1 = new Texture("pacman/images/PacMan.png");
-        pacman2up = new Texture("pacman/images/PacMan.png");
-        pacman3up = new Texture("pacman/images/PacMan.png");
-        pacman4up = new Texture("pacman/images/PacMan.png");
-        pacman2down = new Texture("pacman/images/PacMan.png");
-        pacman3down = new Texture("pacman/images/PacMan.png");
-        pacman4down = new Texture("pacman/images/PacMan.png");
-        pacman2left = new Texture("pacman/images/PacMan.png");
-        pacman3left = new Texture("pacman/images/PacMan.png");
-        pacman4left = new Texture("pacman/images/PacMan.png");
-        pacman2right = new Texture("pacman/images/PacMan.png");
-        pacman3right = new Texture("pacman/images/PacMan.png");
-        pacman4right = new Texture("pacman/images/PacMan.png");
-
+        ghost = new Texture("pacman/images/bug.png");
+        pacman1 = new Texture("pacman/images/head.png");
+        pacman2up = new Texture("pacman/images/head.png");
+        pacman3up = new Texture("pacman/images/head.png");
+        pacman4up = new Texture("pacman/images/head.png");
+        pacman2down = new Texture("pacman/images/head.png");
+        pacman3down = new Texture("pacman/images/head.png");
+        pacman4down = new Texture("pacman/images/head.png");
+        pacman2left = new Texture("pacman/images/head.png");
+        pacman3left = new Texture("pacman/images/head.png");
+        pacman4left = new Texture("pacman/images/head.png");
+        pacman2right = new Texture("pacman/images/head.png");
+        pacman3right = new Texture("pacman/images/head.png");
+        pacman4right = new Texture("pacman/images/head.png");
+        bg = new Texture("pacman/images/bg.png");
     }
 
     @Override
@@ -618,10 +627,11 @@ public class Board implements Screen {
         
         checkInput();
 
+        
+        
         drawMaze();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-
         drawPacman();
         drawScore();
         doAnim();
