@@ -21,7 +21,7 @@ public class Board implements Screen {
     private final BestGame game;
     private final OrthographicCamera camera;
 
-    private final Color dotColor = new Color(192 / 255f, 192 / 255f, 0, 1);
+    private final Color dotColor = new Color(237 / 255f, 7 / 255f, 7 / 255f, 1);
     private Color mazeColor;
 
     private boolean inGame = false;
